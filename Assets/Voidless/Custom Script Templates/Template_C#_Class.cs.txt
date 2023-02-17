@@ -1,0 +1,19 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class #SCRIPTNAME#
+{
+	/// <summary>#SCRIPTNAME# default constructor.</summary>
+	public #SCRIPTNAME#()
+	{
+		#NOTRIM#
+	}
+
+	/// <summary>#SCRIPTNAME# destructor.</summary>
+	~#SCRIPTNAME#()
+	{
+		#NOTRIM#
+	}
+}

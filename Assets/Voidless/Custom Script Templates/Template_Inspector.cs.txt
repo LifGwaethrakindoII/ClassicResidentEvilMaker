@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+[CustomEditor(typeof(#TARGETNAME#))]
+public class #SCRIPTNAME# : Editor
+{
+	private #TARGETNAME# #TARGETVARIABLE#; 	/// <summary>Inspector's Target.</summary>
+
+	/// <summary>Sets target property.</summary>
+	private void OnEnable()
+	{
+		#TARGETVARIABLE# = target as #TARGETNAME#;
+	}
+
+	/// <summary>OnInspectorGUI override.</summary>
+	public override void OnInspectorGUI()
+	{	
+		DrawDefaultInspector();
+		#NOTRIM#
+	}
+}

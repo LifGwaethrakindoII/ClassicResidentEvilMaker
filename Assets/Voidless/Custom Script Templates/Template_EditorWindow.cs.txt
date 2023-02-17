@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+public class #SCRIPTNAME# : EditorWindow
+{
+	protected const string #UPPERCASE_SCRIPTNAME#_PATH = "PLEASE/REPLACE/THIS #SCRIPTNAME#'s PATH"; 	/// <summary>#SCRIPTNAME#'s path.</summary>
+
+	public static #SCRIPTNAME# #TARGETVARIABLE#; 										/// <summary>#SCRIPTNAME#'s static reference</summary>
+
+	/// <summary>Creates a new #SCRIPTNAME# window.</summary>
+	/// <returns>Created #SCRIPTNAME# window.</summary>
+	[MenuItem(#UPPERCASE_SCRIPTNAME#_PATH)]
+	public static #SCRIPTNAME# Create#SCRIPTNAME#()
+	{
+		#TARGETVARIABLE#; = GetWindow<#SCRIPTNAME#>("INSERT_NAME");
+		#NOTRIM#
+		return #TARGETVARIABLE#;
+	}
+
+	/// <summary>Use OnGUI to draw all the controls of your window.</summary>
+	private void OnGUI()
+	{
+		#NOTRIM#
+	}
+}

@@ -1,0 +1,30 @@
+using System;
+using UnityEngine;
+using UnityEditor;
+
+[CustomPropertyDrawer(typeof(#TARGETNAME#))]
+public class #SCRIPTNAME# : PropertyDrawer
+{
+	/// <summary>Overrides OnGUI method.</summary>
+	/// <param name="_position">Rectangle on the screen to use for the property GUI.</param>
+	/// <param name="_property">The SerializedProperty to make the custom GUI for.</param>
+	/// <param name="_label">The Label of this Property.</param>
+	public override void OnGUI (Rect _position, SerializedProperty _property, GUIContent _label)
+	{
+		_label = EditorGUI.BeginProperty(_position, _label, _property);
+		int indent = EditorGUI.indentLevel;
+
+		#NOTRIM#
+
+		EditorGUI.indentLevel = indent;
+		EditorGUI.EndProperty();
+	}
+
+	/// <summary>Override this method to specify how tall the GUI for this field is in pixels.</summary>
+	/// <param name="_property">The SerializedProperty to make the custom GUI for.</param>
+	/// <param name="_label">The label of this property.</param>
+	public override float GetPropertyHeight(SerializedProperty _property, GUIContent _label)
+	{
+		return base.GetPropertyHeight(_property, _label);
+	}
+}

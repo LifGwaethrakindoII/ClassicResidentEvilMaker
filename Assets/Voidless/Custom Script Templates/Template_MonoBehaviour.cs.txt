@@ -1,0 +1,27 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+#region UnityMethods:
+	/// <summary>#SCRIPTNAME#'s instance initialization.</summary>
+	private void Awake()
+	{
+		#NOTRIM#
+	}
+
+	/// <summary>#SCRIPTNAME#'s starting actions before 1st Update frame.</summary>
+	private void Start ()
+	{
+		#NOTRIM#
+	}
+	
+	/// <summary>#SCRIPTNAME#'s tick at each frame.</summary>
+	private void Update ()
+	{
+		#NOTRIM#
+	}
+#endregion
+}
