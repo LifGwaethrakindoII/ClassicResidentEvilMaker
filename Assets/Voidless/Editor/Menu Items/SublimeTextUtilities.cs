@@ -9,7 +9,7 @@ namespace Voidless
 {
 public static class SublimeTextUtilities
 {
-	[MenuItem("Voidless/Sublime Text Utilities/Create Sublime Project")]
+	//[MenuItem("Voidless/Sublime Text Utilities/Create Sublime Project")]
 	public static void CreateSublimeProject()
 	{
 		Debug.Log("[SublimeTextUtilities] Creating Window for Sublime-Project Creation for project " + VString.GetProjectName());

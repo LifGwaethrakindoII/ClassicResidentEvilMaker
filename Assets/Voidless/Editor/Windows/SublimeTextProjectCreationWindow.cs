@@ -9,6 +9,7 @@ namespace Voidless
 public class SublimeTextProjectCreationWindow : EditorWindow
 {
 	protected const string SUBLIMETEXTPROJECTCREATIONWINDOW_PATH = "Voidless/Sublime Text Utilities/Create Sublime Project"; 	/// <summary>SublimeTextProjectCreationWindow's path.</summary>
+	public const string EXTERNAL_SCRIPT_EDITOR_ARGS = "$(File):$(Line)";
 
 	public static SublimeTextProjectCreationWindow sublimeTextProjectCreationWindow; 											/// <summary>SublimeTextProjectCreationWindow's static reference</summary>
 	private SublimeProjectSettings settings; 																					/// <summary>Sublime Project's Settings.</summary>
@@ -32,6 +33,11 @@ public class SublimeTextProjectCreationWindow : EditorWindow
 	/// <summary>Use OnGUI to draw all the controls of your window.</summary>
 	private void OnGUI()
 	{
+		if(GUILayout.Button("Copy External Scripts Editor Args to Clipboard"))
+		{
+			VGUIUtility.CopyToClipboard(EXTERNAL_SCRIPT_EDITOR_ARGS);
+		}
+		GUILayout.Space(5.0f);
 		GUILayout.Label("Folder Paths: ");
 		GUILayout.BeginVertical();
 		foreach(string subPath in subPaths)
@@ -46,9 +52,15 @@ public class SublimeTextProjectCreationWindow : EditorWindow
 		{
 			string newSubPath = EditorUtility.SaveFolderPanel("Select Folder Sub-Path", string.Empty, string.Empty);
 			newSubPath = TrimmedPath(newSubPath);
+			bool empty = string.IsNullOrEmpty(newSubPath);
 
-			if(!subPaths.Contains(newSubPath)) subPaths.Add(newSubPath);
-			else EditorUtility.DisplayDialog("Path Already Included", "Path " + newSubPath + " is already included.", "Okay");
+			if(!empty && !subPaths.Contains(newSubPath)) subPaths.Add(newSubPath);
+			else
+			{
+				string title = empty ? "Path Not Provided" : "Path Already Included";
+				string message = empty ? "You didn't provide a valid path." : ("Path " + newSubPath + " is already included.");
+				EditorUtility.DisplayDialog(title, message, "Okay");
+			}
 		}
 		if(GUILayout.Button("Save")) SaveData();
 
