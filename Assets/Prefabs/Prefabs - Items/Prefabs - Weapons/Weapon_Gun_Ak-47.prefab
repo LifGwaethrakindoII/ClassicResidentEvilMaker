@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3706137399557333307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5532039014935011815}
+  - component: {fileID: 2090728475798792613}
+  m_Layer: 0
+  m_Name: Weapon_Gun_Ak-47
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5532039014935011815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3706137399557333307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2481832464864944900}
+  - {fileID: 5053570604006284086}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2090728475798792613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3706137399557333307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b3ed5f704769049bdcd31aca77faa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: AK-47
+  _description: Alahu Akbar
+  _interactions: 7
+  _icon: {fileID: 0}
+  _grabPoints:
+  - _parent: {fileID: 0}
+    _position: {x: 0, y: -0.05, z: -0.21}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _eulerAngles: {x: -0, y: 0, z: 0}
+    _scale: {x: 0, y: 0, z: 0}
+    hideScale: 0
+    showForLinePath: 0
+    showHandles: 0
+  - _parent: {fileID: 0}
+    _position: {x: 0, y: 0.03, z: 0.12}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _eulerAngles: {x: -0, y: 0, z: 0}
+    _scale: {x: 0, y: 0, z: 0}
+    hideScale: 0
+    showForLinePath: 0
+    showHandles: 0
+  _damage: 2.5
+  _rate: 0.1
+  _criticalRatio: 0
+  _shootingWeaponType: 0
+  _muzzle: {fileID: 5053570604006284086}
+  _ejectionPort: {fileID: 0}
+  _range: 10
+  _horizontalAngle: 45
+  _verticalAngle: 35
+  _rechargeSpeed: 0
+  _ammoCapacity: 50
+--- !u!1 &7976157953434545292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5053570604006284086}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5053570604006284086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976157953434545292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5532039014935011815}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2736926365280617711
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5532039014935011815}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76ab3a532a3d6cb44a5cbe8968ff00d0, type: 2}
+    - target: {fileID: -1555683517917461301, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76ab3a532a3d6cb44a5cbe8968ff00d0, type: 2}
+    - target: {fileID: 919132149155446097, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+        type: 3}
+      propertyPath: m_Name
+      value: ak-47
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75481afc27ab3b84aa4f93dc30eac2f5, type: 3}
+--- !u!4 &2481832464864944900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 75481afc27ab3b84aa4f93dc30eac2f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2736926365280617711}
+  m_PrefabAsset: {fileID: 0}

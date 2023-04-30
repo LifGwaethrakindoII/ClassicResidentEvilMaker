@@ -17,6 +17,7 @@ public static class VGizmos
 	/// <param name="r">Gizmos' Radius [0.5f as default].</param>
 	public static void DrawTransformData(TransformData _data, float r = 0.5f)
 	{
+		Color originalColor = Gizmos.color;
 		Vector3 position = _data.position;
 		Quaternion rotation = _data.rotation;
 
@@ -28,6 +29,8 @@ public static class VGizmos
 		Gizmos.DrawRay(position, (rotation * Vector3.up * r));
 		Gizmos.color = Color.blue;
 		Gizmos.DrawRay(position, (rotation * Vector3.forward * r));
+
+		Gizmos.color = originalColor;
 	}
 
 	/// \TODO Finish the damn method...

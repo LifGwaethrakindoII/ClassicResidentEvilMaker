@@ -24,18 +24,19 @@ public class Character : MonoBehaviour
 	public const int STATE_FLAG_RUNNING = 1 << 0;
 
 	[InfoBox("@ToString()")]
-	[SerializeField] private VAnimatorController animatorController; 		/// <summary>AnimatorController's Component attached to the Animator.</summary>
-	[SerializeField] private AnimationEventInvoker animationEventInvoker; 	/// <summary>AnimationEventInvoker's Component attached to the Animator.</summary>
-	[SerializeField] private AngleDotProduct forwardDotLimit; 				/// <summary>Forward Vector's Dot Limit.</summary>
-	[SerializeField] private AngleDotProduct backwardDotLimit; 				/// <summary>Backward Vector's Dot Limit.</summary>
-	[SerializeField] private float movementSpeed; 							/// <summary>Movement's Speed.</summary>
-	[SerializeField] private float runScalar; 								/// <summary>Running's Scalar.</summary>
-	[SerializeField] private float backwardsMovementScalar; 				/// <summary>Backwards' Movement Scalar.</summary>
-	[SerializeField] private float rotationSpeed; 							/// <summary>Rotation's Speed.</summary>
-	private Renderer[] _renderers; 											/// <summary>Character's Renderers.</summary>
-	private int state; 														/// <summary>State Flags.</summary>
+	[SerializeField] private StringTransformDictionary _jointMapping;
+	[SerializeField] private VAnimatorController animatorController;
+	[SerializeField] private AnimationEventInvoker animationEventInvoker;
+	[SerializeField] private AngleDotProduct forwardDotLimit;
+	[SerializeField] private AngleDotProduct backwardDotLimit;
+	[SerializeField] private float movementSpeed;
+	[SerializeField] private float runScalar;
+	[SerializeField] private float backwardsMovementScalar;
+	[SerializeField] private float rotationSpeed;
+	private Renderer[] _renderers;
+	private int state;
 	private int abilities;
-	private CharacterController _characterController; 						/// <summary>CharacterController's Component.</summary>
+	private CharacterController _characterController;
 
 	/// <summary>Gets and Sets renderers property.</summary>
 	public Renderer[] renderers
