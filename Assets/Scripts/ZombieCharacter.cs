@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Voidless
+namespace Voidless.REMaker
 {
 public class ZombieCharacter : Character
 {

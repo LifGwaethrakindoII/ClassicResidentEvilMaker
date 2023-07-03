@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Voidless
 {
-[CustomEditor(typeof(AnimatorTester))]
+//[CustomEditor(typeof(AnimatorTester))]
 public class AnimatorTesterInspector : Editor
 {
 	private AnimatorTester animatorTester; 			/// <summary>Inspector's Target.</summary>
@@ -20,6 +20,9 @@ public class AnimatorTesterInspector : Editor
 	/// <summary>OnInspectorGUI override.</summary>
 	public override void OnInspectorGUI()
 	{	
+		DrawDefaultInspector();
+		return;
+
 		int index = 0;
 		parameters = animatorTester.parameters;
 		//DrawDefaultInspector();

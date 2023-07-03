@@ -452,7 +452,7 @@ public class SteeringVehicle : VMonoBehaviour
 	/// <param name="a">Wander Angle's reference.</param>
 	/// <param name="m">Vehicle's Mass [1.0 by default].</param>
 	/// <returns>Wandering Point [without steering force applied].</returns>
-	public static Vector3 GetWanderPoint(Vector3 p, ref Vector3 v, float s, float f, float d, float r, ref float a, float c, float m = 1.0f)
+	public static Vector3 GetWanderPoint(Vector3 p, ref Vector3 v, float s, float f, float d, float r, ref float a, float c, float m = 1.0f, Vector3 x = default(Vector3))
 	{
 		Vector3 displacement = (v.sqrMagnitude == 0.0f ? Vector3.forward : v.normalized) * r;
 		Vector3 circleCenter = p + (v.normalized * d);
@@ -461,7 +461,11 @@ public class SteeringVehicle : VMonoBehaviour
 
 		/// No need to rotate the vector if there is no angle...
 		/// \TODO Find a way to rotate
-		//if(a != 0.0f) displacement = displacement.Rotate(a);
+		if(a != 0.0f)
+		{
+			if(x == default(Vector3)) x = Vector3.up;
+			displacement = Quaternion.AngleAxis(a, x) * displacement;
+		}
 
 		return (circleCenter + displacement);
 	}

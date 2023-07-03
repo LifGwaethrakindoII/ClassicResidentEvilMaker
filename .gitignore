@@ -63,3 +63,4 @@ crashlytics-build.properties
 # ============ #
 *.sublime-project
 *.sublime-workspace
+*.vsconfig

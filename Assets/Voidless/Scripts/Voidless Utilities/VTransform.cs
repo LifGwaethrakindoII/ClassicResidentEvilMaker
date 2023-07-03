@@ -4,6 +4,15 @@ namespace Voidless
 {
 public static class VTransform
 {
+	/// <summary>Sets position as if the local offset was the pivot.</summary>
+	/// <param name="_transform">Transform's reference.</param>
+	/// <param name="p">Position.</param>
+	/// <param name="o">Local offset [from the provided Transform's perspective].</param>
+	public static void SetOffsetedPosition(this Transform _transform, Vector3 p, Vector3 o)
+	{
+		_transform.position = p + (_transform.rotation * -o);
+	}
+
 	/// <summary>Gets Top Parent.</summary>
 	/// <param name="_transform">Parent's Reference.</param>
 	/// <returns>Top Parent.</returns>

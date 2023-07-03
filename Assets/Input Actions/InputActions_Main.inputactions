@@ -6,20 +6,175 @@
             "id": "7148137d-7b56-44ee-8d89-67c1a86dcefb",
             "actions": [
                 {
-                    "name": "LeftAxis_X",
-                    "type": "Value",
-                    "id": "bee921ab-40d5-4017-a325-2221838e3334",
-                    "expectedControlType": "Axis",
+                    "name": "Center_Main",
+                    "type": "Button",
+                    "id": "006fc987-7ac8-441e-847d-63bca45fe3a1",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "LeftAxis_Y",
+                    "name": "Center_Right",
+                    "type": "Button",
+                    "id": "c3dc5a8e-6a5e-4799-bf64-43fc282db1e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Center_Left",
+                    "type": "Button",
+                    "id": "c34750dd-a4f4-4cff-9607-864d47da8a2f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoulder_Left_1",
+                    "type": "Button",
+                    "id": "9ded9575-fbdf-422b-85fc-928054a004b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoulder_Left_2",
+                    "type": "Button",
+                    "id": "841f65ce-ba8e-4ba4-8e4b-24a66e8b2e7c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoulder_Right_1",
+                    "type": "Button",
+                    "id": "6a702d3a-017a-474e-8b8f-4d21f9090d52",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoulder_Right_2",
+                    "type": "Button",
+                    "id": "8e7712a4-6f67-486f-8000-aa62d809df5c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action_Left",
+                    "type": "Button",
+                    "id": "a9db5733-b68c-4038-9ba5-4d596d52cff2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action_Right",
+                    "type": "Button",
+                    "id": "cdd74731-1afa-46b1-a03a-0580b873c9c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action_Down",
+                    "type": "Button",
+                    "id": "d63f0dca-8127-4071-b4a9-388c709c2a13",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action_Up",
+                    "type": "Button",
+                    "id": "2baee0bd-ef6d-4a7a-a7cf-7aaaa829e9a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "D-Pad_Up",
+                    "type": "Button",
+                    "id": "b94afc87-6f36-49ba-8591-68ddfcba40da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "D-Pad_Down",
+                    "type": "Button",
+                    "id": "7a811d49-bad4-40d9-a289-b929576c3259",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "D-Pad_Right",
+                    "type": "Button",
+                    "id": "125f8730-eee0-47de-9d5d-e492780fbd48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "D-Pad_Left",
+                    "type": "Button",
+                    "id": "45b15b35-40ef-4749-8faa-94cc2f4c6869",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Axis_Right_Y",
+                    "type": "Value",
+                    "id": "76d84bf6-7d0b-420c-a89b-371ade93d83b",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Axis_Right_X",
+                    "type": "Value",
+                    "id": "d04a1c1d-00e7-4c3d-9f15-097c8ca0e159",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Axis_Left_Y",
                     "type": "Value",
                     "id": "9ad0058d-2a29-40f2-b2d3-66b6d154de87",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Axis_Left_X",
+                    "type": "Value",
+                    "id": "bee921ab-40d5-4017-a325-2221838e3334",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -27,7 +182,8 @@
                     "id": "f851665a-808a-4c2e-9d00-e74edc98be7b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Action1",
@@ -35,7 +191,8 @@
                     "id": "04c56024-6263-4235-9625-54a2f913aab3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TrackedDeviceOrientation",
@@ -43,7 +200,8 @@
                     "id": "f7b5a11d-ff72-45d1-bf6a-c72ed08d8b09",
                     "expectedControlType": "Quaternion",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TrackedDevicePosition",
@@ -51,7 +209,8 @@
                     "id": "667e4811-caef-4655-8307-0acb22a64945",
                     "expectedControlType": "Vector3",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "RightClick",
@@ -59,7 +218,8 @@
                     "id": "0e26b822-f08b-472c-a91d-021f3aeee9d8",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "MiddleClick",
@@ -67,7 +227,8 @@
                     "id": "0f3d5cef-c6fd-41df-878f-63b06d04cebb",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ScrollWheel",
@@ -75,7 +236,8 @@
                     "id": "b88e0654-3b6f-44bf-bee6-9ad553dbae39",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Click",
@@ -83,7 +245,8 @@
                     "id": "f026c99e-1ab6-4f74-9e52-288e02f372bb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Point",
@@ -91,7 +254,8 @@
                     "id": "a4a11dfb-02c2-4ae0-b73e-c841d5528a05",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -99,7 +263,8 @@
                     "id": "fbae8c51-5da0-4984-9af1-c8ff4f1a2554",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Submit",
@@ -107,7 +272,8 @@
                     "id": "8c6c3cab-223b-465b-9bf6-460f09c6db27",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Navigate",
@@ -115,76 +281,11 @@
                     "id": "a430a20d-3193-4071-962d-19765bcb2f76",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "1DAxis_Horizontal[XboxController]",
-                    "id": "8fc2e610-5134-44e1-9e9b-c060699bec16",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftAxis_X",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "b18af7c7-5c62-473d-bc2b-de2fbaa43eed",
-                    "path": "<XInputController>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "ControllerScheme_XboxController",
-                    "action": "LeftAxis_X",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "0489559b-9d0f-431b-829c-43826c8e9345",
-                    "path": "<XInputController>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "ControllerScheme_XboxController",
-                    "action": "LeftAxis_X",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1DAxis_Vertical[XboxController]",
-                    "id": "38df1172-0a0c-4492-ae86-f3c6f95e5f87",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LeftAxis_Y",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "71f1cce6-9537-4482-82b7-b7ed58b0e28e",
-                    "path": "<XInputController>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "ControllerScheme_XboxController",
-                    "action": "LeftAxis_Y",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "d6d24441-8661-4d5d-af83-1be3e943c95d",
-                    "path": "<XInputController>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "ControllerScheme_XboxController",
-                    "action": "LeftAxis_Y",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
                 {
                     "name": "",
                     "id": "da7aa62c-4559-4c59-8ae1-5539106d3695",
@@ -624,6 +725,303 @@
                     "action": "TrackedDeviceOrientation",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1DAxis_Horizontal[XboxController]",
+                    "id": "8fc2e610-5134-44e1-9e9b-c060699bec16",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Axis_Left_X",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b18af7c7-5c62-473d-bc2b-de2fbaa43eed",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Left_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0489559b-9d0f-431b-829c-43826c8e9345",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Left_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis_Vertical[XboxController]",
+                    "id": "38df1172-0a0c-4492-ae86-f3c6f95e5f87",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Axis_Left_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "71f1cce6-9537-4482-82b7-b7ed58b0e28e",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Left_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "d6d24441-8661-4d5d-af83-1be3e943c95d",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Left_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1DAxis_Vertical [Xbox Controller]",
+                    "id": "11090747-02a6-474b-863f-f2dea646e9db",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Axis_Right_Y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "37ccc3f4-470a-47f9-9a70-ba2bc0568aae",
+                    "path": "<XInputController>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Right_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7b299aa4-19d5-446f-8e55-529be78ef2e0",
+                    "path": "<XInputController>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Right_Y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "152cffe6-0491-4214-9814-67ad704cb9c0",
+                    "path": "<XInputController>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "D-Pad_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bbbf043b-f294-4be3-870e-1f0e6b44676b",
+                    "path": "<XInputController>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "D-Pad_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "412ba77a-c9a6-4ba4-8e53-5aa696d07869",
+                    "path": "<XInputController>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "D-Pad_Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "26ec075c-fc4f-4248-8b82-6bd476bf99f9",
+                    "path": "<XInputController>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "D-Pad_Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29b65119-f80d-448c-8a86-0b11dd0d02ff",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Action_Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cafcb7e8-0a05-43f5-857b-0802721cbe85",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Action_Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47e52a43-cff1-4bc5-beb8-783878391936",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Action_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3533b932-80e9-45f7-bf95-115ff8349b54",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Action_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cabc0dd8-a344-47ff-8758-bb0206637491",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Shoulder_Right_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec06210b-3a67-49e2-92e0-66ac09919146",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Shoulder_Right_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3c34ca9-6f1f-458d-9922-2d756f2388d8",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Shoulder_Left_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3a7c888-ce46-4eba-b86d-ef850c87a7e8",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Shoulder_Left_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53ecf84c-58ee-4d3c-bfb8-8218b9bc8dd0",
+                    "path": "<XInputController>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Center_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "178fc6bc-09cb-405b-ab80-9f9fd73a520f",
+                    "path": "<XInputController>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Center_Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29476286-e0c9-4959-bdd9-60c5d0f57bb0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Center_Main",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1DAxis_Horizontal [Xbox Controller]",
+                    "id": "c5ed1047-f7b2-43da-8eff-b60129f2d8e8",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Axis_Right_X",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "71a6241b-3440-4f62-b6df-c817e800c341",
+                    "path": "<XInputController>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Right_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "c9867cec-3875-482c-9c0b-ba7751c99e72",
+                    "path": "<XInputController>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "ControllerScheme_XboxController",
+                    "action": "Axis_Right_X",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -637,7 +1035,8 @@
                     "id": "e83d54d5-8648-4d85-92f5-24df12f5edaf",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Submit",
@@ -645,7 +1044,8 @@
                     "id": "3489084b-f5bf-4db2-8cea-ac9f3539c800",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -653,7 +1053,8 @@
                     "id": "e9932216-21bf-4616-8427-fd9892560bb1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Point",
@@ -661,7 +1062,8 @@
                     "id": "b4a2d06f-a0ba-468f-9e16-156bb0dd2b46",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Click",
@@ -669,7 +1071,8 @@
                     "id": "f4618896-8102-4a91-ad17-3b50cfebb4d9",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ScrollWheel",
@@ -677,7 +1080,8 @@
                     "id": "887a9f72-f530-49c6-aab9-2843e90b5f7e",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "MiddleClick",
@@ -685,7 +1089,8 @@
                     "id": "cf4ba97b-dd1f-40a0-85c2-a9175919e0f7",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "RightClick",
@@ -693,7 +1098,8 @@
                     "id": "7757fc19-6343-400f-a454-855c42c89055",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TrackedDevicePosition",
@@ -701,7 +1107,8 @@
                     "id": "7054aa33-51dd-4d8c-92e4-d3d78bd85f4e",
                     "expectedControlType": "Vector3",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TrackedDeviceOrientation",
@@ -709,7 +1116,8 @@
                     "id": "2164e2df-87c9-40e9-b316-303201941546",
                     "expectedControlType": "Quaternion",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

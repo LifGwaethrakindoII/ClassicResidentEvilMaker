@@ -9,10 +9,10 @@ namespace Voidless
 [Serializable]
 public struct LayerValue : ISerializationCallbackReceiver
 {
-	[SerializeField] private int _value; 		/// <summary>Layer Mask's Value (int required to GameObject's layer property).</summary>
-	[SerializeField] private string _name; 		/// <summary>Layer's Name.</summary>
+	[SerializeField] private int _value;
+	[SerializeField] private string _name;
 #if UNITY_EDITOR
-	public int index; 							/// <summary>Property Drawer's Index.</summary>
+	public int index;
 #endif
 
 	/// <summary>Gets and Sets value property.</summary>

@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GamePadInputController_0
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: f4761dc8abbb405418443518b0871def,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _leftAxisXInputReference
+    value: 
+    objectReference: {fileID: 1737964991179318629, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _leftAxisYInputReference
+    value: 
+    objectReference: {fileID: -267405872610996801, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _rightAxisXInputReference
+    value: 
+    objectReference: {fileID: -7317983616965211137, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _rightAxisYInputReference
+    value: 
+    objectReference: {fileID: -6193864351151478137, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _leftDeadZoneRadius
+    value: 0.01
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _rightDeadZoneRadius
+    value: 0.01
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UIPointInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UILeftClickInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UIMiddleClickInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UIRightClickInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UIScrollWheelInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UIMoveInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UISubmitInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UICancelInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UITrackedPositionInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _UITrackedOrientationInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _dPadLeftInputReference
+    value: 
+    objectReference: {fileID: 6591096855194217332, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _dPadRightInputReference
+    value: 
+    objectReference: {fileID: 6807628686848660585, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _dPadDownInputReference
+    value: 
+    objectReference: {fileID: 7610587647358374101, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _dPadUpInputReference
+    value: 
+    objectReference: {fileID: -2928940788177476931, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _leftStickClickInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _rightStickClickInputReference
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _leftActionInputReference
+    value: 
+    objectReference: {fileID: 8190053455429700251, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _rightActionInputReference
+    value: 
+    objectReference: {fileID: -8602423876935435469, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _downActionInputReference
+    value: 
+    objectReference: {fileID: -2784656306619910949, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _upActionInputReference
+    value: 
+    objectReference: {fileID: 2228500470216534941, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _leftShoulder1InputReference
+    value: 
+    objectReference: {fileID: 6761247361532981038, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _leftShoulder2InputReference
+    value: 
+    objectReference: {fileID: 8102801929357219934, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _rightShoulder1InputReference
+    value: 
+    objectReference: {fileID: 5183325886274729832, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _rightShoulder2InputReference
+    value: 
+    objectReference: {fileID: 6462449165438751860, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _leftCenterInputReference
+    value: 
+    objectReference: {fileID: -2192837618533556582, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _rightCenterInputReference
+    value: 
+    objectReference: {fileID: 4193762670074399500, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: _mainCenterInputReference
+    value: 
+    objectReference: {fileID: -5175822820060775719, guid: 8076ab697b0a2a046975c153353d3eae,
+      type: 3}
+  m_ExcludedProperties: []

@@ -582,6 +582,22 @@ public static class VMath
 		return state = min + ((state + seed) % (max - min));
 	}
 
+	/// <summary>Linear Congruential Generator Random function [you pass the seed].</summary>
+	/// <param name="min">Min Random Value.</param>
+	/// <param name="max">Max Random Value.</param>
+	/// <param name="seed">Custom seed [it does not change with time].</param>
+	public static float LCGRand(float min, float max, float seed)
+	{
+	    const float a = 1664525f;
+	    const float c = 1013904223f;
+	    const float m = 4294967296f; // 2^32
+
+	    seed = seed * a + c;
+	    float randomValue = seed / m;
+
+	    return min + randomValue * (max - min);
+	}
+
 	/// <summary>PID [Proportional-Integral-Derivative] Loop Function.</summary>
 	/// <param name="x">Current Value.</param>
 	/// <param name="y">Target Value.</param>

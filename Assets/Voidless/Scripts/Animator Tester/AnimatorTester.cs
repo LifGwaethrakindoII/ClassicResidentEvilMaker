@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Voidless
 {
@@ -55,6 +56,25 @@ public class AnimatorTester : MonoBehaviour
 				break;
 			}
 		}
+	}
+
+	[Button("Play")]
+	/// <summary>Plays target animation.</summary>
+	/// <param name="_animation">Animation's Name in the AnimatorController.</param>
+	/// <param name="_layer">Animation's layer [0 by default].</param>
+	private void Play(string _animation, int _layer = 0)
+	{
+		animator.Play(_animation, _layer);
+	}
+
+	[Button("Cross-Fade")]
+	/// <summary>Cross-Fades to target animation.</summary>
+	/// <param name="_animation">Animation's Name in the AnimatorController.</param>
+	/// <param name="_fadeDuration">Normalized Fade's duration.</param>
+	/// <param name="_layer">Animation's layer [0 by default].</param>
+	private void CrossFade(string _animation, float _fadeDuration = 0.3f, int _layer = 0)
+	{
+		animator.CrossFade(_animation, _fadeDuration, _layer);
 	}
 }
 }

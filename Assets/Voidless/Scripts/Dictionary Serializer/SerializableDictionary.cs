@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 /*============================================================
 **
@@ -129,16 +130,19 @@ public class SerializableDictionary<K, V> : Dictionary<K, V>, ISerializationCall
 
 [Serializable] public struct StringArray { public string[] array; }
 
-// Char Key Dictionaries:
+/*======================================================================================================================
+|   Char Dictionaries:                                                                                                 |
+======================================================================================================================*/
 [Serializable] public class CharKeyDictionary<V> : SerializableDictionary<char, V> { /*...*/ }
 [Serializable] public class CharFloatDictionary : CharKeyDictionary<float> { /*...*/ }
 [Serializable] public class CharTransformDictionary : CharKeyDictionary<Transform> { /*...*/ }
 [Serializable] public class CharAudioClipDictionary : CharKeyDictionary<AudioClip> { /*...*/ }
 
-// String Key Dictionaries:
+/*======================================================================================================================
+|   String Dictionaries:                                                                                               |
+======================================================================================================================*/
 [Serializable] public class StringKeyDictionary<V> : SerializableDictionary<string, V> { /*...*/ }
 [Serializable] public class StringStringDictionary : StringKeyDictionary<string> { /*...*/ }
-//[Serializable] public class StringStringArrayDictionary : StringKeyDictionary<string[]> { /*...*/ }
 [Serializable] public class StringStringArrayDictionary : StringKeyDictionary<StringArray> { /*...*/ }
 [Serializable] public class StringBoolDictionary : StringKeyDictionary<bool> { /*...*/ }
 [Serializable] public class StringIntDictionary : StringKeyDictionary<int> { /*...*/ }
@@ -153,27 +157,45 @@ public class SerializableDictionary<K, V> : Dictionary<K, V>, ISerializationCall
 [Serializable] public class StringRendererDictionary : StringKeyDictionary<Renderer> { /*...*/ }
 [Serializable] public class StringSkinnedMeshRendererDictionary : StringKeyDictionary<SkinnedMeshRenderer> { /*...*/ }
 [Serializable] public class StringMaterialDictionary : StringKeyDictionary<Material> { /*...*/ }
+[Serializable] public class StringMultiAimConstraintDictionary : StringKeyDictionary<MultiAimConstraint> { /*...*/ }
+[Serializable] public class StringTwoBoneIKConstraintDictionary : StringKeyDictionary<TwoBoneIKConstraint> { /*...*/ }
 
-// Int Key Dictionaries:
+/*======================================================================================================================
+|   Int Dictionaries:                                                                                                  |
+======================================================================================================================*/
 [Serializable] public class IntKeyDictionary<V> : SerializableDictionary<int, V> { /*...*/ }
 [Serializable] public class IntStringDictionary : IntKeyDictionary<string> { /*...*/ }
 [Serializable] public class IntFloatDictionary : IntKeyDictionary<float> { /*...*/ }
 
-// Float Key Dictionaries:
+/*======================================================================================================================
+|   Float Dictionaries:                                                                                                |
+======================================================================================================================*/
 [Serializable] public class FloatKeyDictionary<V> : SerializableDictionary<float, V> { /*...*/ }
 [Serializable] public class FloatStringDictionary : FloatKeyDictionary<string> { /*...*/ }
 [Serializable] public class FloatIntDictionary : FloatKeyDictionary<int> { /*...*/ }
 [Serializable] public class FloatColorDictionary : FloatKeyDictionary<Color> { /*...*/ }
 
-// GameObjectTag Key Dictionaries:
+/*======================================================================================================================
+|   GameObjectTag Dictionaries:                                                                                        |
+======================================================================================================================*/
 [Serializable] public class TagKeyDictionary<V> : SerializableDictionary<GameObjectTag, V> { /*...*/ }
 [Serializable] public class TagIndexDictionary : TagKeyDictionary<CollectionIndex> { /*...*/ }
 [Serializable] public class TagIntDictionary : TagKeyDictionary<int> { /*...*/ }
 
-// LayerValue Key Dictionaries:
+/*======================================================================================================================
+|   LayerValue Dictionaries:                                                                                           |
+======================================================================================================================*/
 [Serializable] public class LayerValueKeyDictionary<V> : SerializableDictionary<LayerValue, V> { /*...*/ }
 [Serializable] public class LayerValueStringDictionary : LayerValueKeyDictionary<string> { /*...*/ }
 [Serializable] public class LayerValueIntDictionary : LayerValueKeyDictionary<int> { /*...*/ }
 [Serializable] public class LayerValueFloatDictionary : LayerValueKeyDictionary<float> { /*...*/ }
+
+/*======================================================================================================================
+|   LayerMask Dictionaries:                                                                                           |
+======================================================================================================================*/
+[Serializable] public class LayerMaskKeyDictionary<V> : SerializableDictionary<LayerMask, V> { /*...*/ }
+[Serializable] public class LayerMaskStringDictionary : LayerMaskKeyDictionary<string> { /*...*/ }
+[Serializable] public class LayerMaskIntDictionary : LayerMaskKeyDictionary<int> { /*...*/ }
+[Serializable] public class LayerMaskFloatDictionary : LayerMaskKeyDictionary<float> { /*...*/ }
 
 }

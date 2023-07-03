@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Voidless
+namespace Voidless.REMaker
 {
 public class CharacterAIController<T> : MonoBehaviour where T : Character
 {

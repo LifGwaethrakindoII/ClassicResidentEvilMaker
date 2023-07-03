@@ -3,11 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*===========================================================================
+**
+** Class:  VAnimation
+**
+** Purpose: Static class for Animations (Legacy's Animation, AnimationClips,
+** Animator, AnimatorController, etc.).
+**
+** NOTE: This static class does not have functions/methods for Unity's 
+** Animation Rigging.
+**
+** Author: Lîf Gwaethrakindo
+**
+===========================================================================*/
+
 namespace Voidless
 {
 public static class VAnimation
 {
-	public static readonly int HASH_ANIMATION_EMPTY; 	/// <summary>Empty Animation's Hash.</summary>
+	public static readonly int HASH_ANIMATION_EMPTY;
+
+	public const int LAYER_ANIMATION_MAIN = 0;
 
 	/// <summary>VAnimation's static constructor.</summary>
 	static VAnimation()

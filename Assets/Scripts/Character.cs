@@ -4,8 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Animations.Rigging;
 
-namespace Voidless
+namespace Voidless.REMaker
 {
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
@@ -22,21 +23,45 @@ public class Character : MonoBehaviour
 	public const int FLAG_ABILITY_ROTATE = 1 << 1;
 	public const int FLAG_ABILITY_ALL = ~0;
 	public const int STATE_FLAG_RUNNING = 1 << 0;
+	public const int STATE_FLAG_TURNINGAROUND = 1 << 1;
+	public const int STATE_FLAG_AIMING = 1 << 2;
+	public const int STATE_FLAG_ATTACKING = 1 << 3;
 
 	[InfoBox("@ToString()")]
-	[SerializeField] private StringTransformDictionary _jointMapping;
-	[SerializeField] private VAnimatorController animatorController;
-	[SerializeField] private AnimationEventInvoker animationEventInvoker;
-	[SerializeField] private AngleDotProduct forwardDotLimit;
-	[SerializeField] private AngleDotProduct backwardDotLimit;
-	[SerializeField] private float movementSpeed;
-	[SerializeField] private float runScalar;
-	[SerializeField] private float backwardsMovementScalar;
-	[SerializeField] private float rotationSpeed;
+	[Header("Component Dependencies:")]
+	[TabGroup("Components")][SerializeField] private VAnimatorController _animatorController;
+	[TabGroup("Components")][SerializeField] private AnimationEventInvoker _animationEventInvoker;
+	[Space(5f)]
+	[TabGroup("Movement")][SerializeField] private float movementSpeed;
+	[TabGroup("Movement")][SerializeField] private float runScalar;
+	[TabGroup("Movement")][SerializeField] private float backwardsMovementScalar;
+	[TabGroup("Movement")][SerializeField] private float turnAroundDuration;
+	[Space(5f)]
+	[TabGroup("Rotation")][SerializeField] private float rotationSpeed;
+	[TabGroup("Rotation")][SerializeField][Range(0.0f, 180.0f)] private float _minMovementAngle;
+	[Space(5f)]
+	[Header("Rig Constraints:")]
+	[TabGroup("Animations" ,"Rig")][SerializeField] private StringMultiAimConstraintDictionary _multiAimConstraints;
+	[TabGroup("Animations" ,"Rig")][SerializeField] private StringTwoBoneIKConstraintDictionary _twoBoneIKConstraints;
+	[Space(5f)]
+	[Header("Animator Controller's Attributes:")]
+	[TabGroup("Animations" ,"Animations")][SerializeField] private int _locomotionLayer;
+	[TabGroup("Animations" ,"Animations")][SerializeField] private int _actionLayer;
+	[TabGroup("Animations" ,"Animations")][SerializeField][Range(0.0f, 1.0f)] private float _defaultCrossFade;
+	[TabGroup("Animations" ,"Animations")][SerializeField] private UnityHash _leftAxisXHash;
+	[TabGroup("Animations" ,"Animations")][SerializeField] private UnityHash _leftAxisYHash;
+	[TabGroup("Animations" ,"Animations")][SerializeField] private UnityHash _rightAxisXHash;
+	[TabGroup("Animations" ,"Animations")][SerializeField] private UnityHash _rightAxisYHash;
 	private Renderer[] _renderers;
-	private int state;
-	private int abilities;
 	private CharacterController _characterController;
+	private Item _equippedItem;
+	private Weapon _equippedWeapon;
+	private Vector2 _leftAxes;
+	private Vector2 _rightAxes;
+	private int _states;
+	private int _abilities;
+	protected Coroutine actionRoutine;
+	protected Coroutine turnAroundRoutine;
 
 	/// <summary>Gets and Sets renderers property.</summary>
 	public Renderer[] renderers
@@ -55,7 +80,76 @@ public class Character : MonoBehaviour
 		}
 	}
 
-#region UnityMethods:
+	/// <summary>Gets animatorController property.</summary>
+	public VAnimatorController animatorController { get { return _animatorController; } }
+
+	/// <summary>Gets animationEventInvoker property.</summary>
+	public AnimationEventInvoker animationEventInvoker { get { return _animationEventInvoker; } }
+
+	/// <summary>Gets locomotionLayer property.</summary>
+	public int locomotionLayer { get { return _locomotionLayer; } }
+
+	/// <summary>Gets actionLayer property.</summary>
+	public int actionLayer { get { return _actionLayer; } }
+
+	/// <summary>Gets and Sets states property.</summary>
+	public int states
+	{
+		get { return _states; }
+		protected set { _states = value; }
+	}
+
+	/// <summary>Gets and Sets abilities property.</summary>
+	public int abilities
+	{
+		get { return _abilities; }
+		protected set { _abilities = value; }
+	}
+
+	/// <summary>Gets and Sets minMovementAngle property.</summary>
+	public float minMovementAngle
+	{
+		get { return _minMovementAngle; }
+		set { _minMovementAngle = value; }
+	}
+
+	/// <summary>Gets defaultCrossFade property.</summary>
+	public float defaultCrossFade { get { return _defaultCrossFade; } }
+
+	/// <summary>Gets and Sets equippedWeapon property.</summary>
+	public Weapon equippedWeapon
+	{
+		get { return _equippedWeapon; }
+		set { _equippedWeapon = value; }
+	}
+
+	/// <summary>Gets and Sets leftAxes property.</summary>
+	public Vector2 leftAxes
+	{
+		get { return _leftAxes; }
+		protected set { _leftAxes = value; }
+	}
+
+	/// <summary>Gets and Sets rightAxes property.</summary>
+	public Vector2 rightAxes
+	{
+		get { return _rightAxes; }
+		protected set { _rightAxes = value; }
+	}
+
+	/// <summary>Gets leftAxisXHash property.</summary>
+	public UnityHash leftAxisXHash { get { return _leftAxisXHash; } }
+
+	/// <summary>Gets leftAxisYHash property.</summary>
+	public UnityHash leftAxisYHash { get { return _leftAxisYHash; } }
+
+	/// <summary>Gets rightAxisXHash property.</summary>
+	public UnityHash rightAxisXHash { get { return _rightAxisXHash; } }
+
+	/// <summary>Gets rightAxisYHash property.</summary>
+	public UnityHash rightAxisYHash { get { return _rightAxisYHash; } }
+
+	/// <summary>Character's static constructor.</summary>
 	static Character()
 	{
 		NAMES_ABILITIES = new string[]
@@ -65,9 +159,16 @@ public class Character : MonoBehaviour
 		};
 		NAMES_STATES = new string[]
 		{
-			"STATE_FLAG_RUNNING"
+			"STATE_FLAG_RUNNING",
+			"STATE_FLAG_TURNINGAROUND",
+			"STATE_FLAG_AIMING",
+			"STATE_FLAG_ATTACKING"
 		};
 	}
+
+#region UnityMethods:
+	/// <summary>Draws Gizmos on Editor mode when Character's instance is selected.</summary>
+	protected virtual void OnDrawGizmosSelected() { /*...*/ }
 
 	/// <summary>Character's instance initialization.</summary>
 	protected virtual void Awake()
@@ -77,24 +178,24 @@ public class Character : MonoBehaviour
 	}
 
 	/// <summary>Character's starting actions before 1st Update frame.</summary>
-	protected virtual void Start ()
-	{
-		
-	}
+	protected virtual void Start() { /*...*/ }
 	
 	/// <summary>Character's tick at each frame.</summary>
-	protected virtual void Update ()
+	protected virtual void Update()
 	{
-		
+		OnAxesUpdated();
 	}
 #endregion
 
 	[OnInspectorGUI("Get Renderers")]
+	/// <summary>Gets self-contained Renderers.</summary>
 	private void GetRenderers()
 	{
 		renderers = GetComponentsInChildren<Renderer>();
 	}
 
+	/// <summary>Enables Renderers.</summary>
+	/// <param name="_enable">Enable? true by default.</param>
 	public void EnableRenderers(bool _enable = true)
 	{
 		if(renderers == null || renderers.Length == 0) GetRenderers();
@@ -105,10 +206,27 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	/// <summary>Sets Left Axes.</summary>
+	/// <param name="_axes">Left Axes.</param>
+	public virtual void SetLeftAxes(Vector2 _axes)
+	{
+		leftAxes = _axes;
+	}
+
+	/// <summary>Sets Right Axes.</summary>
+	/// <param name="_axes">Right Axes.</param>
+	public virtual void SetRightAxes(Vector2 _axes)
+	{
+		rightAxes = _axes;
+	}
+
+	/// <summary>Callback intwernally invoked when both left and right axes are updated.</summary>
+	protected virtual void OnAxesUpdated() { /*...*/ }
+
 	/// <summary>Goes Idle.</summary>
 	public void GoIdle()
 	{
-		animatorController.animator.SetFloat("LeftAxisY", 0.0f);
+		animatorController.animator.SetFloat(leftAxisYHash, 0.0f);
 	}
 
 	/// <summary>Activates/Deactivates Running Flag.</summary>
@@ -118,11 +236,11 @@ public class Character : MonoBehaviour
 		switch(_run)
 		{
 			case true:
-			state |= STATE_FLAG_RUNNING;
+			states |= STATE_FLAG_RUNNING;
 			break;
 
 			case false:
-			state &= ~STATE_FLAG_RUNNING;
+			states &= ~STATE_FLAG_RUNNING;
 			break;
 		}
 	}
@@ -131,6 +249,9 @@ public class Character : MonoBehaviour
 	/// <param name="axes">Displacement's Axes.</param>
 	public void Move(Vector2 axes)
 	{
+		/// Don't move if turning around...
+		if(turnAroundRoutine != null || (states | STATE_FLAG_TURNINGAROUND) == states) return;
+
 		Vector3 axes3D = new Vector3(axes.x, 0.0f, axes.y);
 		
 		if(axes3D.sqrMagnitude > 1.0f) axes3D.Normalize();
@@ -138,7 +259,7 @@ public class Character : MonoBehaviour
 		float sign = Mathf.Sign(axes3D.z);
 		float blend = 0.0f;
 
-		RotateSelf(axes3D.x * sign);
+		RotateSelf(axes3D.x);
 
 		if(Mathf.Abs(axes3D.z) > Mathf.Abs(axes3D.x))
 		{
@@ -147,7 +268,7 @@ public class Character : MonoBehaviour
 				sign *= backwardsMovementScalar;
 				blend = -2.0f;
 
-			} else if((state | STATE_FLAG_RUNNING) == state)
+			} else if((states | STATE_FLAG_RUNNING) == states)
 			{
 				sign *= runScalar;
 				blend = 2.0f;
@@ -162,7 +283,7 @@ public class Character : MonoBehaviour
 		}
 		else blend = -1.0f;
 
-		animatorController.animator.SetFloat("LeftAxisY", blend);
+		animatorController.animator.SetFloat(leftAxisYHash, blend);
 	}
 
 	/// <summary>Rotates and moves character towards provided direction [used for AI context].</summary>
@@ -173,14 +294,9 @@ public class Character : MonoBehaviour
 		float sign = Mathf.Sign((Quaternion.Inverse(transform.rotation) * direction).x);
 		float n = Mathf.Min(angle, rotationSpeed) / rotationSpeed;
 
-
 		RotateTowardsDirection(direction);
 
-		//if(angle > 10.0f) return;
-
-		/*Vector3 displacement = transform.forward * (Mathf.Min(direction.magnitude, 1.0f) * movementSpeed * Time.deltaTime);
-		characterController.Move(displacement);*/
-		Move(Vector2.up);
+		if(angle <= minMovementAngle) Move(Vector2.up);
 	}
 
 	/// <summary>Rotates itself on the left or right, depending of the provided sign.</summary>
@@ -224,6 +340,13 @@ public class Character : MonoBehaviour
 		transform.rotation = rotation;
 	}
 
+	/// <summary>Makes the character turn around.</summary>
+	public virtual void TurnAround()
+	{
+		states |= STATE_FLAG_TURNINGAROUND;
+		this.StartCoroutine(TurnAroundCoroutine(), ref turnAroundRoutine);
+	}
+
 	/// <summary>Callback invoked when an Animation Event occurs.</summary>
 	/// <param name="_event">Animation's Event.</param>
 	protected virtual void OnAnimationEvent(AnimationEvent _event)
@@ -252,6 +375,29 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	/// <summary>Turn-Around's Coroutine.</summary>
+	protected virtual IEnumerator TurnAroundCoroutine()
+	{
+		float i = 1.0f / turnAroundDuration;
+		float t = 0.0f;
+		Quaternion a = transform.rotation;
+		Quaternion b = a * Quaternion.Euler(0.0f, 180.0f, 0.0f);
+
+		while(t < 1.0f)
+		{
+			transform.rotation = Quaternion.Lerp(a, b, t);
+			t += (Time.deltaTime * i);
+			animatorController.animator.SetFloat(leftAxisYHash, 1.0f);
+			yield return null;
+		}
+
+		animatorController.animator.SetFloat(leftAxisYHash, 0.0f);
+		transform.rotation = b;
+		states &= ~STATE_FLAG_TURNINGAROUND;
+		this.DispatchCoroutine(ref turnAroundRoutine);
+	}
+
+	/// <returns>String representing this Character.</returns>
 	public override string ToString()
 	{
 		StringBuilder builder = new StringBuilder();
@@ -259,7 +405,7 @@ public class Character : MonoBehaviour
 		builder.Append("Abilities: ");
 		builder.AppendLine(VString.GetNamedBitChain(abilities, NAMES_ABILITIES));
 		builder.Append("States: ");
-		builder.AppendLine(VString.GetNamedBitChain(state, NAMES_STATES));
+		builder.AppendLine(VString.GetNamedBitChain(states, NAMES_STATES));
 
 		return builder.ToString();
 	}

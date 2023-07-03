@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
-namespace Voidless
+namespace Voidless.REMaker
 {
 public class TextInteractableTriggerZone : InteractableTriggerZone
 {

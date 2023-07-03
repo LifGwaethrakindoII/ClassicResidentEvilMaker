@@ -596,6 +596,30 @@ public static class VVector3
 		return (b.normalized * ScalarProjection(a, b));
 	}
 
+	 /// <summary>Gets normalized progress of projection into plane.</summary>
+    /// <param name="v">Location of the Vector along the Plane.</param>
+    /// <param name="n">Direction of the Vector towards the Plane.</param>
+    public static float GetScalarProjectionProgress(Vector3 v, Vector3 n)
+    {
+        Vector3 p1 = Vector3.ProjectOnPlane(v, n);
+        Vector3 p2 = Vector3.ProjectOnPlane(v, p1);
+        float s = Vector3.Dot(p2.normalized, n.normalized) < 0.0f ? -1.0f : 1.0f;
+
+        return s * (p2.magnitude / n.magnitude);
+    }
+    
+	/*
+    /// Name Suggestions: GetProjectionProgress, GetNormalizedProjectionProgress, GetPlaneProjectionProgress
+    public static float GetScalarProjectionProgress(Vector3 v, Vector3 n)
+    {
+        Vector3 p1 = Vector3.ProjectOnPlane(v, n);
+        Vector3 parallel = Vector3.Cross(n, Vector3.Cross(v, n));
+        float s = Mathf.Sign(Vector3.Dot(parallel, n));
+
+        return s * (parallel.normalized.magnitude / n.magnitude);
+    }
+    */
+
 	/// <summary>Gets identity vector of given orientation semantic.</summary>
 	/// <param name="_orientation">Orientation's Semantics.</param>
 	/// <returns>Identity vector interpreted from orientation semantic.</returns>

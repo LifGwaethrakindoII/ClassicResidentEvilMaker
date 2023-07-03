@@ -11,6 +11,8 @@ public class Weapon : Item
     [SerializeField] private float _damage;
     [SerializeField] private float _rate;
     [SerializeField][Range(0.0f, 1.0f)] private float _criticalRatio;
+    [Space(5f)]
+    [SerializeField] private UnityHash _performHash;
 
     /// <summary>Gets and Sets damage property.</summary>
     public float damage
@@ -31,6 +33,16 @@ public class Weapon : Item
     {
         get { return _criticalRatio; }
         set { _criticalRatio = Mathf.Clamp(value, 0.0f, 1.0f); }
+    }
+
+    /// <summary>Gets performHash property.</summary>
+    public UnityHash performHash { get { return _performHash; } }
+
+    /// <summary>Resets Weapon's instance to its default values.</summary>
+    protected override void Reset()
+    {
+        base.Reset();
+        interactions = Interactions.WeaponDefaultInteractions; // (Pickable, Removable, Equippable)
     }
 }
 }

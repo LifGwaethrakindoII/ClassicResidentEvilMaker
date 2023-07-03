@@ -19,6 +19,8 @@ public static class VAnimator
 {
 	public static readonly AnimatorCredential CREDENTIAL_EMPTY; 	/// <summary>Empty's Animator-Credential.</summary>
 
+	public const float DEFAULT_FADEDURATION = 0.3f;
+
 	/// <summary>VAnimator's static constructor.</summary>
 	static VAnimator()
 	{
@@ -174,14 +176,54 @@ public static class VAnimator
 		return _animator.GetCurrentAnimatorStateInfo(_layer).IsTag(_tag);
 	}
 
+	/// <summary>Evaluates if AnimatorStateInfo has full hash.</summary>
+	/// <param name="_info">AnimatorStateInfo to evaluate.</param>
+	/// <param name="_fullNAmeHash">Full-name's hash.</param>
 	public static bool HasFullHash(this AnimatorStateInfo _info, int _fullPathHash)
 	{
 		return _info.fullPathHash == _fullPathHash;
 	}
 
+	/// <summary>Evaluates if AnimatorStateInfo has short hash.</summary>
+	/// <param name="_info">AnimatorStateInfo to evaluate.</param>
+	/// <param name="_shortNAmeHash">Short-name's hash.</param>
 	public static bool HasShortHash(this AnimatorStateInfo _info, int _shortNameHash)
 	{
 		return _info.shortNameHash == _shortNameHash;
+	}
+
+	/// <summary>Cross-Fades into animation and waits until its over.</summary>
+	/// <param name="_animator">Animator's reference.</param>
+	/// <param name="_animationHash">Animation's name.</param>
+	/// <param name="_fadeDuration">Fade's duration [0.3f by default].</param>
+	/// <param name="_layer">Animation's layer [0 by default].</param>
+	/// <param name="onAnimationEnds">Optional callback invoked when the cross-faded animation ends [null by default].</param>
+	public static IEnumerator CrossFadeAndWait(this Animator _animator, int _animationHash, float _fadeDuration = DEFAULT_FADEDURATION, int _layer = 0, Action onAnimationEnds = null)
+	{   
+	    // transition to the specified animation using CrossFade
+	    _animator.CrossFade(_animationHash, _fadeDuration, _layer);
+	    float t = 0.0f;
+	    
+	    // wait until the cross-fade is complete
+	    while (_animator.IsInTransition(_layer))
+	    {
+	    	t += Time.deltaTime;
+	        yield return null;
+	    }
+	    
+	    // wait until the looping animation has completed a full cycle
+	    AnimatorStateInfo animationState = _animator.GetCurrentAnimatorStateInfo(_layer);
+	    while (animationState.HasShortHash(_animationHash) && animationState.normalizedTime < 1.0f)
+	    {
+	    	Debug.Log("[VAnimator] animationState Short-Hash: " + animationState.shortNameHash);
+	    	t += Time.deltaTime;
+	        animationState = _animator.GetCurrentAnimatorStateInfo(_layer);
+	        yield return null;
+	    }
+	    
+	    // the animation has finished, do something else here...
+	    Debug.Log("Animation " + _animationHash + " has completed a full cycle in " + t.ToString() + " seconds.");
+	    if(onAnimationEnds != null) onAnimationEnds();
 	}
 
 	/// <summary>Creates a string that shows all the Animator State's Info.</summary>

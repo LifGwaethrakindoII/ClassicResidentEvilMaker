@@ -15,6 +15,11 @@ public enum Interactions
     Equippable = 4,
     Consumable = 8,
     Combinable = 16,
+
+    WeaponDefaultInteractions = Pickable | Removable | Equippable,
+    RecoveryDefaultInteractions = Pickable | Removable | Consumable,
+    AmmoDefaultInteractions = Pickable | Removable | Combinable,
+    KeyDefaultInteractions = Pickable
 }
 
 public abstract class Item : MonoBehaviour
@@ -76,9 +81,21 @@ public abstract class Item : MonoBehaviour
         }
     }
 
+    /// <summary>Resets Weapon's instance to its default values.</summary>
+    protected virtual void Reset() { /*...*/ }
+
+    /// <summary>Gets Grab Point Offset [local position].</summary>
+    /// <param name="index">Grab Point's Index [0 by default].</param>
+    public Vector3 GetGrabPointOffset(int index = 0)
+    {
+        bool hasGrabPoints = grabPoints != null;
+        
+        return hasGrabPoints ? grabPoints[index].localPosition : Vector3.zero;   
+    }
+
     /// <summary>Gets Grab Point.</summary>
     /// <param name="index">Grab Point's Index.</param>
-    public TransformData GetGrabPointData(int index)
+    public TransformData GetGrabPointData(int index = 0)
     {
         bool hasGrabPoints = grabPoints != null;
         TransformData data = hasGrabPoints ? grabPoints[index] : transform;

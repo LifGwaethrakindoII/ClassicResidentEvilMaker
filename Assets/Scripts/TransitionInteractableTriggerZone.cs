@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Voidless
+namespace Voidless.REMaker
 {
 public class TransitionInteractableTriggerZone : InteractableTriggerZone
 {

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Voidless
+namespace Voidless.REMaker
 {
 public abstract class InteractableTriggerZone : TriggerZone<InteractableTriggerZone>
 {
 	/// <summary>Callback invoked when InteractableTriggerZone's instance is going to be destroyed and passed to the Garbage Collector.</summary>
 	private void OnDestroy()
 	{
-		CharacterInputController.onInputAction -= OnInputAction;
+		HumanoidCharacterInputController.onInputAction -= OnInputAction;
 	}
 
 	/// <summary>Callback internally invoked when a GameObject's Collider enters the TriggerZone.</summary>
@@ -20,7 +20,7 @@ public abstract class InteractableTriggerZone : TriggerZone<InteractableTriggerZ
 	protected override void OnEnter(Collider _collider)
 	{
 		base.OnEnter(_collider);
-		CharacterInputController.onInputAction += OnInputAction;
+		HumanoidCharacterInputController.onInputAction += OnInputAction;
 	}
 
 	/// <summary>Callback internally invoked when a GameObject's Collider exits the TriggerZone.</summary>
@@ -29,7 +29,7 @@ public abstract class InteractableTriggerZone : TriggerZone<InteractableTriggerZ
 	protected override void OnExit(Collider _collider, TriggerZone<InteractableTriggerZone> _nextTriggerZone)
 	{
 		base.OnExit(_collider, _nextTriggerZone);
-		CharacterInputController.onInputAction -= OnInputAction;
+		HumanoidCharacterInputController.onInputAction -= OnInputAction;
 	}
 
 	/// <summary>Callback invoked when an action is performed.</summary>
