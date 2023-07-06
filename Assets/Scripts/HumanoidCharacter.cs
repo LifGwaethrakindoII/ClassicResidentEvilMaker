@@ -39,6 +39,7 @@ public class HumanoidCharacter : Character
 	[Header("Torso Aiming's Attributes:")]
 	[TabGroup("Animations" ,"Rig")][SerializeField][Range(0.0f, 90.0f)] private float _torsoAimMaxAngle;
 	[TabGroup("Animations" ,"Rig")][SerializeField][Range(0.0f, 90.0f)] private float _torsoAimMinAngle;
+	[TabGroup("Animations" ,"Rig")][SerializeField] private EulerRotation _torsoAimOffset;
 	[TabGroup("Animations" ,"Rig")][SerializeField] private float _torsoAimRadius;
 	[Space(5f)]
 	[TabGroup("Animations" ,"Animations")][SerializeField] private UnityHash _aimHash;
@@ -205,10 +206,13 @@ public class HumanoidCharacter : Character
 			break;
 
 			case false:
+				states &= ~STATE_FLAG_AIMING;
+
+				if((states | STATE_FLAG_ATTACKING) == states) return;
+
 				VAnimationRigging.SetRigConstraintsWeights(0.0f, torsoAimConstraint);
 				animatorController.animator.SetLayerWeight(locomotionLayer, 1.0f);
 				animatorController.animator.CrossFade(VAnimator.CREDENTIAL_EMPTY, defaultCrossFade, actionLayer);
-				states &= ~STATE_FLAG_AIMING;
 			break;
 		}
 	}
@@ -221,7 +225,7 @@ public class HumanoidCharacter : Character
 		float t = VMath.RemapValueToNormalizedRange(a, -1.0f, 1.0f);
 		Transform torso = torsoAimConstraint.data.constrainedObject;
 		float radius = _torsoAimRadius;
-		Quaternion rotation = transform.rotation;
+		Quaternion rotation = transform.rotation * _torsoAimOffset;
 		Quaternion minRotation = rotation * Quaternion.Euler(Vector3.right * _torsoAimMinAngle);
 		Quaternion maxRotation = rotation * Quaternion.Euler(-Vector3.right * _torsoAimMaxAngle);
 		Vector3 min = torso.position + (minRotation * (Vector3.forward * radius));
@@ -347,17 +351,22 @@ public class HumanoidCharacter : Character
 		return true;
 	}
 
+	/// <summary>Callback internally invoked after the weapon has been used.</summary>
 	private void OnWeaponUsed()
 	{
 		this.DispatchCoroutine(ref actionRoutine);
-		Aim(false);
 
 		states &= ~ STATE_FLAG_ATTACKING;
 		if((states | STATE_FLAG_AIMING) == states)
 		{
 			Debug.Log("[HumanoidCharacter] Re-aiming...");
+			Aim(false);
 			Aim(true);
-		} else Debug.Log("[HumanoidCharacter] NO?");
+		} else
+		{
+			Aim(false);
+			Debug.Log("[HumanoidCharacter] NO?");
+		}
 	}
 }
 }

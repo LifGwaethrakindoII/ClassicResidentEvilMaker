@@ -204,6 +204,8 @@ public static class VAnimator
 	    _animator.CrossFade(_animationHash, _fadeDuration, _layer);
 	    float t = 0.0f;
 	    
+	    yield return null;
+
 	    // wait until the cross-fade is complete
 	    while (_animator.IsInTransition(_layer))
 	    {

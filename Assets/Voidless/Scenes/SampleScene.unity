@@ -535,7 +535,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636677762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b4c6a951d2ea0046972e3aa988e5f47, type: 3}
   m_Name: 
@@ -953,8 +953,32 @@ PrefabInstance:
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
+      propertyPath: _torsoAimOffset._rotation.w
+      value: 0.92736566
+      objectReference: {fileID: 0}
+    - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
+      propertyPath: _torsoAimOffset._rotation.x
+      value: 0.2226408
+      objectReference: {fileID: 0}
+    - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
+      propertyPath: _torsoAimOffset._rotation.y
+      value: 0.29239726
+      objectReference: {fileID: 0}
+    - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
+      propertyPath: _torsoAimOffset._rotation.z
+      value: -0.07019837
+      objectReference: {fileID: 0}
+    - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
       propertyPath: forwardDotLimit._dotProduct
       value: 0.81915206
+      objectReference: {fileID: 0}
+    - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
+      propertyPath: _torsoAimOffset._eulerAngles.x
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 450203336, guid: 9ca7349426497cd4a9f450f9d0b5257d, type: 3}
+      propertyPath: _torsoAimOffset._eulerAngles.y
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1632245116940217777, guid: 9ca7349426497cd4a9f450f9d0b5257d,
         type: 3}

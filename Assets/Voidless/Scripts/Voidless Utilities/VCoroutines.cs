@@ -728,7 +728,7 @@ public static class VCoroutines
 		if(onColorChange == null) yield break;
 
 		float t = 0.0f;
-		float  time = 0.0f;
+		float time = 0.0f;
 
 		while(true)
 		{
