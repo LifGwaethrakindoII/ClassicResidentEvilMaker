@@ -445,6 +445,14 @@ public static class VMath
 		return Blend(EaseIn(t, _easeInExponential), EaseOut(t, _easeOutExponential), t);
 	}
 
+	public static float EaseOutBack(float t)
+	{
+		const float c1 = 1.70158f;
+		const float c3 = c1 + 1.0f;
+
+		return 1.0f + c3 * Mathf.Pow(t - 1.0f, 3.0f) + c1 * Mathf.Pow(t - 1.0f, 2.0f);
+	}
+
 	public static float Blend(float a, float b, float weightB)
 	{
 		return a + (weightB * (b - a));
@@ -1632,6 +1640,56 @@ public static class VMath
 		float angle = Mathf.Atan2(v.x, v.y) * RAD_TO_DEG;
 	
 		return angle;
+	}
+
+	/// <summary>Converts Angle in degrees to Dot Product.</summary>
+	/// <param name="a">Angle in degrees.</param>
+	public static float AngleToDot(float a)
+	{
+		return Mathf.Cos(a * Mathf.Deg2Rad);
+	}
+
+	/// <summary>Converts Dot Product into Angle in degrees.</summary>
+	/// <param name="d">Dot Product.</param>
+	public static float DotToAngle(float d)
+	{
+		return Mathf.Acos(d) * Mathf.Rad2Deg;
+	}
+
+	/// <summary>Evaluates if point is within a view cone.</summary>
+	/// <param name="c">Cone's position.</param>
+	/// <param name="f">Cone's direction.</param>
+	/// <param name="p">Point to evaluate.</param>
+	/// <param name="a">Cone's Angle.</param>
+	/// <returns>True if point is inside the cone.</returns>
+	public static bool PointWithinCone(Vector3 c, Vector3 f, Vector3 p, float a)
+	{
+		Vector3 d = p - c;
+		d.Normalize();
+
+		float dot = Vector3.Dot(f, d);
+		float angle = DotToAngle(dot);
+
+		return angle <= a;
+	}
+
+	/// <summary>Evaluates if point is within a view cone with horizontal and vertical angles.</summary>
+	/// <param name="c">Cone's position.</param>
+	/// <param name="f">Cone's direction.</param>
+	/// <param name="p">Point to evaluate.</param>
+	/// <param name="h">Horizontal Angle.</param>
+	/// <param name="v">Vertical Angle.</param>
+	/// <returns>True if point is inside the cone.</returns>
+	public static bool PointWithinCone(Vector3 c, Vector3 f, Vector3 p, float h, float v)
+	{
+		Vector3 d = p - c;
+		d.Normalize();
+
+		float dot = Vector3.Dot(f, d);
+		float cosA = Mathf.Cos(v * 0.5f * Mathf.Deg2Rad);
+		float dh = DotToAngle(dot);
+
+		return dot >= cosA && dh <= (h * 0.5f);
 	}
 
 	/// <summary>Gets 360 system angle between 2 points.</summary>

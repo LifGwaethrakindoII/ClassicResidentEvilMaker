@@ -30,6 +30,47 @@ public static class VPhysics
 		return CollisionResolution(a.velocity, b.velocity, a.mass, b.mass);
 	}
 
+	public static Collider[] OverlapViewCone(Vector3 p, Vector3 f, float r, float h, float v, int _mask = Physics.AllLayers, QueryTriggerInteraction _queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+	{
+        // Calculate the half angles based on vertical and horizontal angles
+        float va = v * 0.5f;
+        float ha = h * 0.5f;
+
+        // Calculate the direction vectors for the cone boundaries
+        Vector3 upperBoundary = Quaternion.Euler(-va, 0f, 0f) * f;
+        Vector3 lowerBoundary = Quaternion.Euler(va, 0f, 0f) * f;
+        Vector3 leftBoundary = Quaternion.Euler(0f, -ha, 0f) * f;
+        Vector3 rightBoundary = Quaternion.Euler(0f, ha, 0f) * f;
+
+        // Perform overlap checks for colliders within the cone
+        List<Collider> collidersList = new List<Collider>();
+        /*Collider[] colliders = Physics.OverlapCapsule(
+            p + upperBoundary * r,
+            p + lowerBoundary * r,
+            r,
+            _mask,
+            _queryTriggerInteraction);*/
+        Collider[] colliders = Physics.OverlapSphere(p, r, _mask, _queryTriggerInteraction);
+
+        if(colliders == null || colliders.Length == 0) return null;
+
+        // Loop through the colliders detected within the capsule
+        foreach (Collider collider in colliders)
+        {
+        	Vector3 point = collider.ClosestPoint(p);
+        	Debug.DrawRay(p, point - p, Color.cyan, 5.0f);
+            if(VMath.PointWithinCone(p, f, point, h, v))
+            collidersList.Add(collider);
+        }
+
+        return collidersList.ToArray();
+	}
+
+	public static Collider[] OverlapViewCone(Vector3 p, Vector3 f, float r, float a, int _mask = Physics.AllLayers, QueryTriggerInteraction _queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+	{
+		return OverlapViewCone(p, f, r, a, a, _mask, _queryTriggerInteraction);
+	}
+
 	/// <summary>Gets a list of Components inside an overlapping Sphere.</summary>
 	/// <param name="_origin">Sphere's Origin.</param>
 	/// <param name="_radius">Sphere's Radius.</param>

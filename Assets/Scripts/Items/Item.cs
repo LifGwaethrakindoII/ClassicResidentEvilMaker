@@ -29,6 +29,7 @@ public abstract class Item : MonoBehaviour
     [SerializeField] private Interactions _interactions;
     [SerializeField] private Sprite _icon;
     [SerializeField] private TransformData[] _grabPoints;
+    [SerializeField] private AudioSource _audioSource;
 
     /// <summary>Gets and Sets name property.</summary>
     public string name
@@ -65,6 +66,9 @@ public abstract class Item : MonoBehaviour
         set { _grabPoints = value; }
     }
 
+    /// <summary>Gets audioSource property.</summary>
+    public AudioSource audioSource { get { return _audioSource; } }
+
     /// <summary>Draws Gizmos on Editor mode.</summary>
     protected virtual void OnDrawGizmos()
     {
@@ -83,6 +87,9 @@ public abstract class Item : MonoBehaviour
 
     /// <summary>Resets Weapon's instance to its default values.</summary>
     protected virtual void Reset() { /*...*/ }
+
+    /// <summary>Item's instance initialization when loaded [Before scene loads].</summary>
+    protected virtual void Awake() { /*...*/ }
 
     /// <summary>Gets Grab Point Offset [local position].</summary>
     /// <param name="index">Grab Point's Index [0 by default].</param>

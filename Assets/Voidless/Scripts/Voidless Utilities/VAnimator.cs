@@ -217,14 +217,14 @@ public static class VAnimator
 	    AnimatorStateInfo animationState = _animator.GetCurrentAnimatorStateInfo(_layer);
 	    while (animationState.HasShortHash(_animationHash) && animationState.normalizedTime < 1.0f)
 	    {
-	    	Debug.Log("[VAnimator] animationState Short-Hash: " + animationState.shortNameHash);
+	    	//Debug.Log("[VAnimator] animationState Short-Hash: " + animationState.shortNameHash);
 	    	t += Time.deltaTime;
 	        animationState = _animator.GetCurrentAnimatorStateInfo(_layer);
 	        yield return null;
 	    }
 	    
 	    // the animation has finished, do something else here...
-	    Debug.Log("Animation " + _animationHash + " has completed a full cycle in " + t.ToString() + " seconds.");
+	    //Debug.Log("Animation " + _animationHash + " has completed a full cycle in " + t.ToString() + " seconds.");
 	    if(onAnimationEnds != null) onAnimationEnds();
 	}
 

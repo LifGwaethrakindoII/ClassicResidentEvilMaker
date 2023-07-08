@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
 	public const string KEY_ANIMATIONEVENT_TURNABILITY_MOVE_ON = "KEY_ANIMATIONEVENT_TURNABILITY_MOVE_ON";
 	public const string KEY_ANIMATIONEVENT_TURNABILITY_ROTATE_OFF = "KEY_ANIMATIONEVENT_TURNABILITY_ROTATE_OFF";
 	public const string KEY_ANIMATIONEVENT_TURNABILITY_ROTATE_ON = "KEY_ANIMATIONEVENT_TURNABILITY_ROTATE_ON";
+	public const string KEY_ANIMATIONEVENT_USEWEAPON = "KEY_ANIMATIONEVENT_USEWEAPON";
 
 	public const int FLAG_ABILITY_MOVE = 1 << 0;
 	public const int FLAG_ABILITY_ROTATE = 1 << 1;
@@ -351,6 +352,8 @@ public class Character : MonoBehaviour
 	/// <param name="_event">Animation's Event.</param>
 	protected virtual void OnAnimationEvent(AnimationEvent _event)
 	{
+		Debug.Log("[Character] Invoked Animation String Event " + _event.stringParameter);
+
 		switch(_event.stringParameter)
 		{
 			case KEY_ANIMATIONEVENT_TURNABILITY_MOVE_OFF:
@@ -367,6 +370,14 @@ public class Character : MonoBehaviour
 
 			case KEY_ANIMATIONEVENT_TURNABILITY_ROTATE_ON:
 				abilities |= FLAG_ABILITY_ROTATE;
+			break;
+
+			case KEY_ANIMATIONEVENT_USEWEAPON:
+				if(equippedWeapon != null)
+				{
+					Debug.Log("[Character] Invoke OnUse() on Weapon " + equippedWeapon.gameObject.name);
+					equippedWeapon.OnUse();
+				}
 			break;
 
 			default:

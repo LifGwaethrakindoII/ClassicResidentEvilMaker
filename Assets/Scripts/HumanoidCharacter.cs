@@ -344,7 +344,7 @@ public class HumanoidCharacter : Character
 	{
 		if(equippedWeapon == null || (states | STATE_FLAG_AIMING) != states) return false;
 
-		Debug.Log("[HumanoidCharacter] Pew, pew. Using weapon's animation: " + equippedWeapon.performHash.ToString());
+		//Debug.Log("[HumanoidCharacter] Pew, pew. Using weapon's animation: " + equippedWeapon.performHash.ToString());
 		states |= STATE_FLAG_ATTACKING;
 		//animatorController.animator.CrossFade(equippedWeapon.performHash, defaultCrossFade, actionLayer);
 		this.StartCoroutine(animatorController.animator.CrossFadeAndWait(equippedWeapon.performHash, defaultCrossFade, actionLayer, OnWeaponUsed), ref actionRoutine);
@@ -359,13 +359,13 @@ public class HumanoidCharacter : Character
 		states &= ~ STATE_FLAG_ATTACKING;
 		if((states | STATE_FLAG_AIMING) == states)
 		{
-			Debug.Log("[HumanoidCharacter] Re-aiming...");
+			//Debug.Log("[HumanoidCharacter] Re-aiming...");
 			Aim(false);
 			Aim(true);
 		} else
 		{
 			Aim(false);
-			Debug.Log("[HumanoidCharacter] NO?");
+			//Debug.Log("[HumanoidCharacter] NO?");
 		}
 	}
 }
