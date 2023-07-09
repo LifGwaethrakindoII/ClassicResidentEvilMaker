@@ -9,6 +9,23 @@ public static class VColor
 	public const float WEIGHT_DISTANCE_BLUE = 0.11f;
 	public const float MAX_COLOR_SQUAREDISTANCE = 9.0f; // (3.0f + 4.0f + 2.0f) from Euclidean Distance weights
 
+	public static readonly Color transparent;
+	public static readonly Color orange;
+	public static readonly Color purple;
+	public static readonly Color pink;
+	public static readonly Color brown;
+
+	/// <summary>Static's constructor.</summary>
+	static VColor()
+	{
+		/// Note: I consulted the colors on Google.
+		transparent = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+		orange = new Color(1.0f, 0.647058823f, 0.0f, 1.0f);
+		purple = new Color(0.5f, 0.0f, 0.5f, 1.0f);
+		pink = new Color(1.0f, 0.752941176f, 0.796078431f);
+		brown = new Color(0.647058823f, 0.164705882f, 0.164705882f);
+	}
+
 	/// <summary>Sets Color Alpha.</summary>
 	/// <param name="_color">The Color that will have its Alpha modified.</param>
 	/// <param name="_alpha">Updated Color Alpha Component.</param>

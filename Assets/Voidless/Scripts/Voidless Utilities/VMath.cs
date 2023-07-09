@@ -331,6 +331,13 @@ public static class VMath
 		return 1.0f - Mathf.Pow(1.0f - t, 3.0f);
 	}
 
+	public static float EaseInElastic(float t)
+	{
+		const float c4 = (2.0f * Mathf.PI) / 3.0f;
+
+		return t == 0.0f || t == 1.0f ? t : -Mathf.Pow(2.0f, 10.0f * t - 10.0f) * Mathf.Sin((t * 10.0f - 10.75f) * c4);
+	}
+
 	/// <returns>Ease-Out Bounce for Normalized Time t.</returns>
 	public static float EaseOutBounce(float t)
 	{
@@ -341,6 +348,11 @@ public static class VMath
 		else if(t < (2 / d1)) 		return n1 * (t -= 1.5f / d1) * t + 0.75f;
 		else if(t < (2.5f / d1)) 	return n1 * (t -= 2.25f / d1) * t + 0.9375f;
 		else 						return n1 * (t -= 2.625f / d1) * t + 0.984375f;
+	}
+
+	public static float EaseOutCirc(float t)
+	{
+		return Mathf.Sqrt(1.0f - Mathf.Pow(t - 1.0f, 2.0f));
 	}
 #endregion
 
@@ -1632,6 +1644,34 @@ public static class VMath
 		return Mathf.Abs(_f1 - _f2) >= (_differenceTolerance == 0.0f ? Mathf.Epsilon : _differenceTolerance);
 	}
 #endregion
+
+	/// <summary>Calculates moment of inertia of a Sphere.</summary>
+    /// <param name="r">Sphere's Radius.</param>
+    /// <param name="m">Mass.</param>
+    /// <returns>Moment of Inertia for a Sphere.</returns>
+    public static float SphereMomentOfInertia(float r, float m)
+    {
+        return (2.0f / 5.0f) * m * r * r;
+    }
+
+    /// <summary>Calculates moment of inertia of a Box.</summary>
+    /// <param name="l">Box's Length.</param>
+    /// <param name="m">Mass.</param>
+    /// <returns>Moment of Inertia for a Box.</returns>
+    public static float BoxMomentOfInertia(float h, float w, float d, float m)
+    {
+        const float BMI = 1.0f / 12.0f;
+        return BMI * m * (h * h) + (w * w) + (d * d);
+    }
+
+    /// <summary>Calculates moment of inertia of a Cube.</summary>
+    /// <param name="l">Cube's Length.</param>
+    /// <param name="m">Mass.</param>
+    /// <returns>Moment of Inertia for a Cube.</returns>
+    public static float CubeMomentOfInertia(float l, float m)
+    {
+        return (m * l * l) / 3.0f;
+    }
 
 	public static float Get360Angle(Vector2 v)
 	{

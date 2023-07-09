@@ -187,7 +187,7 @@ public class ShootingWeapon : Weapon
     /// <summary>Callback invoked when this Weapon should be used.</summary>
     public override void OnUse()
     {
-        if(ejectionVFX != null)
+        /*if(ejectionVFX != null)
         {
             ejectionVFX.gameObject.SetActive(true);
             ejectionVFX.transform.position = ejectionPort.position;
@@ -200,7 +200,7 @@ public class ShootingWeapon : Weapon
             shootingVFX.transform.position = muzzle.position;
             shootingVFX.transform.rotation = muzzle.rotation;
             shootingVFX.Play();   
-        }
+        }*/
         if(audioSource != null && shootingSFX != null)
         {
             audioSource.PlaySound(shootingSFX, false);
@@ -230,9 +230,17 @@ public class ShootingWeapon : Weapon
         }
 
         if(fittestCollider != null)
-        Debug.Log("[ShootingWeapon] Found fittest one: " + fittestCollider.gameObject.name);
-        else
-        Debug.Log("[ShootingWeapon] Nope...");
+        {
+            Debug.Log("[ShootingWeapon] Found fittest one: " + fittestCollider.gameObject.name);
+            HitInteractable hitInteractable = fittestCollider.GetComponent<HitInteractable>();
+            if(hitInteractable != null)
+            {
+                Vector3 d = fittestCollider.transform.position - transform.position;
+                Debug.Log("[ShootingWeapon] Invoking Hit Event...");
+                hitInteractable.InvokeHitEvent(gameObject, d, damage);
+            }
+        }
+        else Debug.Log("[ShootingWeapon] Nope...");
     }
 }
 }

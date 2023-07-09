@@ -393,6 +393,20 @@ public static class VPhysics
 	}
 #endregion
 
+	/// <param name="_rigidbody">Rigidbody's Reference.</param>
+    /// <returns>Local Velocity from Rigidbody.</returns>
+    public static Vector3 GetLocalVelocity(this Rigidbody _rigidbody)
+    {
+        return _rigidbody.transform.InverseTransformDirection(_rigidbody.velocity);
+    }
+
+    /// <param name="_rigidbody">Rigidbody's Reference.</param>
+    /// <returns>Local Angular Velocity from Rigidbody.</returns>
+    public static Vector3 GetLocalAngularVelocity(this Rigidbody _rigidbody)
+    {
+        return _rigidbody.transform.InverseTransformDirection(_rigidbody.angularVelocity);
+    }
+
 	/*public static Vector3 ProjectileProjection(float t, Vector3 v0, Vector3 p0, params Vector3[] G, params float T)
 	{
 		if(G == null || T == null) return Vector3.zero;

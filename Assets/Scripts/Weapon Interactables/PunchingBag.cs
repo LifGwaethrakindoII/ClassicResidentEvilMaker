@@ -8,109 +8,70 @@ namespace Voidless.REMaker
 {
 public class PunchingBag : MonoBehaviour
 {
-    private Quaternion originalRotation;
-    public float intensity = 1f;
-    public float force;
-    public float restitution;
-    public float damping = 0.9f;
-    public float drag = 0.9f;
-    public float restitutionThreshold = 0.01f;
-    public int bounceCount = 3;
-    public float value;
+    [SerializeField] private HitInteractable hitInteractable;
+    [SerializeField] private Transform punchingBagTransform;
+    [SerializeField] private float maxForce;
+    [SerializeField] private float minTorqueDuration;
+    [SerializeField] private float maxTorqueDuration;
+    [SerializeField] private float minRestitutionDuration;
+    [SerializeField] private float maxRestitutionDuration;
+    [SerializeField][Range(0.0f, 85.0f)] private float minRotationLimit;
+    [SerializeField][Range(0.0f, 85.0f)] private float maxRotationLimit;
+    private Coroutine hitRoutine;
 
-    private void Start()
+    /// <summary>PunchingBag's instance initialization when loaded [Before scene loads].</summary>
+    private void Awake()
     {
-        originalRotation = transform.rotation;
+        hitInteractable.onHitEvent += OnHit;
     }
 
     [Button("Hit")]
-    public void Hit(Vector3 hitDirection)
+    /// <summary>Performs Hit's Routine.</summary>
+    /// <param name="direction">Global space direction of the hit.</param>
+    /// <param name="force">Hit's force.</param>
+    public void OnHit(GameObject _source, Vector3 direction, float force)
     {
-        StartCoroutine(Bounce(hitDirection.normalized));
+        if(hitRoutine == null)
+        this.StartCoroutine(HitRoutine(direction, force), ref hitRoutine);
     }
 
-    [Button("TEST")]
-    public void TEST()
+    /// <summary>Hit's Routine.</summary>
+    /// <param name="direction">Global space direction of the hit.</param>
+    /// <param name="force">Hit's force.</param>
+    private IEnumerator HitRoutine(Vector3 direction, float force)
     {
-        StartCoroutine(TESTRoutine());
-    }
+        Vector3 rotationAxis = Vector3.Cross(punchingBagTransform.up, direction.normalized);
+        rotationAxis.Normalize();
 
-    private IEnumerator TESTRoutine()
-    {
-        value = 0.0f;
-        float acceleration = force;
+        float x = Mathf.Min(force / maxForce, 1.0f);
+        x = VMath.EaseOutSine(x);
+        float t = 0.0f;
+        float torqueDuration = Mathf.Lerp(minTorqueDuration, maxTorqueDuration, x);
+        float restitutionDuration = Mathf.Lerp(minRestitutionDuration, maxRestitutionDuration, x);
+        float angularRotation = Mathf.Lerp(minRotationLimit, maxRotationLimit, x);
+        float i = 1.0f / torqueDuration;
+        Quaternion a = punchingBagTransform.rotation;
+        Quaternion b = a * Quaternion.Euler(punchingBagTransform.localEulerAngles + (rotationAxis * angularRotation));
 
-        bool movingPositive = true;
-
-        while (Mathf.Abs(value) > 0.01f || acceleration > 0.01f)
+        while(t < 1.0f)
         {
-            // Apply acceleration
-            value += acceleration;
-
-            // Change direction if necessary
-            if (value > 0 && !movingPositive)
-            {
-                acceleration *= -restitution;
-                movingPositive = true;
-            }
-            else if (value < 0 && movingPositive)
-            {
-                acceleration *= -restitution;
-                movingPositive = false;
-            }
-
-            // Apply drag
-            acceleration *= drag;
-
+            punchingBagTransform.rotation = Quaternion.Lerp(a, b, VMath.EaseOutCirc(t));
+            t += Time.deltaTime * i;
             yield return null;
         }
 
-        // Ensure value reaches exactly 0.0f
-        value = 0.0f;
-    }
+        i = 1.0f / restitutionDuration;
+        t = 0.0f;
 
-    private IEnumerator Bounce(Vector3 direction)
-    {
-        /*float i = intensity;
-        float time = 0.7f;
-        float inverseDuration = 1.0f / time;
-
-        int bouncesRemaining = bounceCount * 2; // Each bounce consists of back and forth motion
-        while (bouncesRemaining > 0)
+        while(t < 1.0f)
         {
-            Quaternion initialRotation = transform.rotation;
-            Quaternion targetRotation = originalRotation * Quaternion.Euler(direction * i);
-            Quaternion inverseRotation = originalRotation * Quaternion.Euler(-direction * i);
-            float t = 0f;
-            while (t < 1.0f)
-            {
-                transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, VMath.EaseOutBack(t));
-                t += Time.deltaTime * inverseDuration;
-                yield return null;
-            }
-
-            time *= damping;
-            i *= damping;
-            direction = -direction; // Reverse the direction for the next bounce
-            bouncesRemaining--;
-            inverseDuration = 1.0f / time;
-        }
-
-        // Reset the rotation after the bounce effect is finished
-        transform.rotation = originalRotation;*/
-
-        Vector3 rotation = Vector3.right * intensity;
-        Vector3 torque = rotation;
-        Vector3 angularVelocity = torque;
-
-        while(angularVelocity.sqrMagnitude > 0.01f)
-        {
-            float dt = Time.deltaTime;
-            transform.rotation *= Quaternion.Euler(angularVelocity * dt);
-            torque += rotation * dt;
-            angularVelocity += torque;
+            punchingBagTransform.rotation = Quaternion.Lerp(b, a, VMath.EaseOutBounce(t));
+            t += Time.deltaTime * i;
             yield return null;
         }
+
+        punchingBagTransform.rotation = a;
+        this.DispatchCoroutine(ref hitRoutine);
     }
 }
 }
