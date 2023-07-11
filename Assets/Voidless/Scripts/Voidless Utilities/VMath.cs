@@ -1369,6 +1369,11 @@ public static class VMath
 		return ((_input - _mapMin) / (_mapMax - _mapMin));
 	}
 
+	public static float NormalizedRate(float x, float max)
+	{
+		return Mathf.Min(x / max, 1.0f);	
+	} 
+
 	/// <summary>Calculates normalized t from input and given range.</summary>
 	/// <param name="x">Input.</param>
 	/// <param name="min">Range's Minimum Value.</param>

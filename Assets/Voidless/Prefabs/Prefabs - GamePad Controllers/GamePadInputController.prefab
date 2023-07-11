@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1277499732094941906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277499732094941904}
+  - component: {fileID: 1277499732094941907}
+  m_Layer: 0
+  m_Name: GamePadInputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1277499732094941904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277499732094941906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1277499732094941907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277499732094941906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4761dc8abbb405418443518b0871def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftAxisXInputReference: {fileID: 1737964991179318629, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _leftAxisYInputReference: {fileID: -267405872610996801, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _rightAxisXInputReference: {fileID: -7317983616965211137, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _rightAxisYInputReference: {fileID: -6193864351151478137, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _leftDeadZoneRadius: 0.01
+  _rightDeadZoneRadius: 0.01
+  _UIPointInputReference: {fileID: 0}
+  _UILeftClickInputReference: {fileID: 0}
+  _UIMiddleClickInputReference: {fileID: 0}
+  _UIRightClickInputReference: {fileID: 0}
+  _UIScrollWheelInputReference: {fileID: 0}
+  _UIMoveInputReference: {fileID: 0}
+  _UISubmitInputReference: {fileID: 0}
+  _UICancelInputReference: {fileID: 0}
+  _UITrackedPositionInputReference: {fileID: 0}
+  _UITrackedOrientationInputReference: {fileID: 0}
+  _dPadLeftInputReference: {fileID: 6591096855194217332, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _dPadRightInputReference: {fileID: 6807628686848660585, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _dPadDownInputReference: {fileID: 7610587647358374101, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _dPadUpInputReference: {fileID: -2928940788177476931, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _leftStickClickInputReference: {fileID: 0}
+  _rightStickClickInputReference: {fileID: 0}
+  _leftActionInputReference: {fileID: 8190053455429700251, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _rightActionInputReference: {fileID: -8602423876935435469, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _downActionInputReference: {fileID: -2784656306619910949, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _upActionInputReference: {fileID: 2228500470216534941, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _leftShoulder1InputReference: {fileID: 6761247361532981038, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _leftShoulder2InputReference: {fileID: 8102801929357219934, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _rightShoulder1InputReference: {fileID: 5183325886274729832, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _rightShoulder2InputReference: {fileID: 6462449165438751860, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _leftCenterInputReference: {fileID: -2192837618533556582, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _rightCenterInputReference: {fileID: 4193762670074399500, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}
+  _mainCenterInputReference: {fileID: -5175822820060775719, guid: 8076ab697b0a2a046975c153353d3eae,
+    type: 3}

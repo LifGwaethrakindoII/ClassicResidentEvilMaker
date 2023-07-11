@@ -11,6 +11,7 @@ namespace Voidless.REMaker
 {
 public class TextInteractableTriggerZone : InteractableTriggerZone
 {
+	[SerializeField] private DialogueText _dialogueText;
 	[TextArea]
 	[SerializeField] private string[] _lines; 				/// <summary>Text Lines.</summary>
 	[SerializeField] private float _writingDuration; 		/// <summary>Writing's Duration.</summary>

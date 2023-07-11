@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6627446538817916846}
   - component: {fileID: 7387528525156230222}
   m_Layer: 0
-  m_Name: Character_Humanoid_Zombie
+  m_Name: Character_Humanoid_Zombie(TestingEnvironment)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,17 +65,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6386d6091f72d1c45be1ac63ca7d3c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorController: {fileID: 6627446538468241994}
-  forwardDotLimit:
-    _angle: 35
-    _dotProduct: 0.81915206
-  backwardDotLimit:
-    _angle: 35
-    _dotProduct: 0.81915206
+  _animatorController: {fileID: 0}
+  _animationEventInvoker: {fileID: 0}
   movementSpeed: 2
   runScalar: 1
   backwardsMovementScalar: 1
+  turnAroundDuration: 0
   rotationSpeed: 180
+  _minMovementAngle: 0
+  _multiAimConstraints:
+    _keysList: []
+    _valuesList: []
+  _twoBoneIKConstraints:
+    _keysList: []
+    _valuesList: []
+  _locomotionLayer: 0
+  _actionLayer: 0
+  _defaultCrossFade: 0
+  _leftAxisXHash:
+    _hashType: 0
+    _key: 
+  _leftAxisYHash:
+    _hashType: 0
+    _key: 
+  _rightAxisXHash:
+    _hashType: 0
+    _key: 
+  _rightAxisYHash:
+    _hashType: 0
+    _key: 
 --- !u!1 &7009872221967852015
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,22 +238,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: -3767621840816565269, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: -799030329297146781, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: -666985854777507172, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: 919132149155446097, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Name
@@ -245,22 +263,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: 1767971894661520185, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: 3036662649062292919, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: 3848968750745923247, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f22e6b02e86ea741b5cfc881c012ed7, type: 2}
+      objectReference: {fileID: 2100000, guid: 374ef418199d70c47a01742734224f14, type: 2}
     - target: {fileID: 5866666021909216657, guid: ae83d35642e02a94e89186009f64553d,
         type: 3}
       propertyPath: m_Controller

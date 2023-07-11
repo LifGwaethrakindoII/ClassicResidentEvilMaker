@@ -187,7 +187,7 @@ public class ShootingWeapon : Weapon
     /// <summary>Callback invoked when this Weapon should be used.</summary>
     public override void OnUse()
     {
-        /*if(ejectionVFX != null)
+        if(ejectionVFX != null)
         {
             ejectionVFX.gameObject.SetActive(true);
             ejectionVFX.transform.position = ejectionPort.position;
@@ -200,7 +200,7 @@ public class ShootingWeapon : Weapon
             shootingVFX.transform.position = muzzle.position;
             shootingVFX.transform.rotation = muzzle.rotation;
             shootingVFX.Play();   
-        }*/
+        }
         if(audioSource != null && shootingSFX != null)
         {
             audioSource.PlaySound(shootingSFX, false);

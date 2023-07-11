@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 
 namespace Voidless
 {
+[ExecuteInEditMode]
 [RequireComponent(typeof(Rigidbody))]
 public class CameraTriggerZone : TriggerZone<CameraTriggerZone>
 {
