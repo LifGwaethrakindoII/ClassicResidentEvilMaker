@@ -118,6 +118,26 @@ public static class VColor
 		);
 	}
 
+	/// <summary>Interpolates from a set of Colors.</summary>
+	/// <param name="t">Normalized Time t.</param>
+	/// <param name="colors">Set of Colors.</param>
+	public static Color Lerp(float t, params Color[] colors)
+	{
+		int numColors = colors.Length;
+	    int segmentCount = numColors - 1;
+
+	    float segmentSize = 1.0f / segmentCount;
+	    int segmentIndex = Mathf.FloorToInt(t / segmentSize);
+
+	    float segmentTime = (t - segmentIndex * segmentSize) / segmentSize;
+
+	    Color colorA = colors[segmentIndex];
+	    Color colorB = colors[segmentIndex + 1];
+
+	    return Color.Lerp(colorA, colorB, segmentTime);
+	}
+
+
 	/// <summary>Interpolates between an array of pixels A towards an array of pixels B.</summary>
 	/// <param name="a">Pixels from A.</param>
 	/// <param name="b">Pixels from B.</param>
@@ -181,6 +201,28 @@ public static class VColor
 		t = Mathf.Clamp(t, 0.0f, 1.0f);
 
 		return Color.Lerp(Color.Lerp(a, c, t), Color.Lerp(c, b, t), t);
+	}
+
+	/// <summary>Calculates a Cubic Beizer Curve point relative to the time, following the formula [B(P0,P1,P2,t) = (1-t)B(P0,P1,t) + tB(P1,P2,t)].</summary>
+	/// <param name="a">Initial value [P0].</param>
+	/// <param name="b">Destiny value [Pf].</param>
+	/// <param name="x">First tanget vector between initialPoint and finalPoint [P1].</param>
+	/// <param name="y">Second tangent vector petween initialPoint and finalPoint [P2].</param>
+	/// <param name="t">Normalized t, clamped internally between -1 and 1.</param>
+	/// <returns>Cubic Beizer Curve point relative to given normalized time.</returns>
+	public static Color CubicBeizer(Color a, Color b, Color x, Color y, float t)
+	{
+		t = Mathf.Clamp(t, -1.0f, 1.0f);
+
+		Color ax = Color.Lerp(a, x, t);
+		Color xy = Color.Lerp(x, y, t);
+		Color yb = Color.Lerp(y, b, t);
+
+		return Color.Lerp(
+			Color.Lerp(ax, xy, t),
+			Color.Lerp(xy, yb, t),
+			t
+		);
 	}
 
 	/// <summary>Calculates the average value of provided Color.</summary>

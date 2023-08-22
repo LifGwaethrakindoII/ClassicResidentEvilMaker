@@ -56,7 +56,7 @@ public class CircularBuffer<T> : IEnumerable<T>, ICollection
 	}
 
 	/// <summary>Gets Count.</summary>
-	public int Count { get { return list.Count; } }
+	public int Count { get { return occupiedSlots; } }
 
 	/// <summary>Gets tailIndex property.</summary>
 	public int tailIndex { get { return RegressIndex(index, occupiedSlots - 1, occupiedSlots); } }
@@ -80,6 +80,26 @@ public class CircularBuffer<T> : IEnumerable<T>, ICollection
 			return collection.SyncRoot;
 		}
 	}
+
+	/// <summary>Gets IsReadOnly property.</summary>
+	public bool IsReadOnly { get { return false; } }
+
+	/// <summary>Gets current element.</summary>
+	public T Current
+    {
+        get
+        {
+            if(occupiedSlots == 0) throw new InvalidOperationException("CircularBuffer is empty.");
+
+            return list[index];
+        }
+        set
+        {
+            if(occupiedSlots == 0) throw new InvalidOperationException("CircularBuffer is empty.");
+
+            list[index] = value;
+        }
+    }
 #endregion
 
 	/// <summary>CircularBuffer default constructor.</summary>
@@ -87,7 +107,6 @@ public class CircularBuffer<T> : IEnumerable<T>, ICollection
 	/// <param name="_defaultValue">Default value for each item on the CircularBuffer.</param>
 	public CircularBuffer(int _size, T _defaultValue = default(T))
 	{
-		Clear();
 		size = Mathf.Max(_size, 1);
 		list = new List<T>(size);
 
@@ -95,6 +114,15 @@ public class CircularBuffer<T> : IEnumerable<T>, ICollection
 		{
 			list.Add(_defaultValue);
 		}
+
+		Clear();
+	}
+
+	/// <summary>Adds Item [from ICollection].</summary>
+	/// <param name="item">Item to add.</param>
+	public void Add(T item)
+	{
+		Insert(item);
 	}
 
 	/// <summary>Inserts item at current index.</summary>
@@ -115,6 +143,20 @@ public class CircularBuffer<T> : IEnumerable<T>, ICollection
 		index = DecreaseIndex(index, size);
 		occupiedSlots--;
 	}
+
+	/// <summary>Removes provided item [from ICollection].</summary>
+	/// <param name="item">Item to remove.</param>
+	public bool Remove(T item)
+    {
+        int removeIndex = list.IndexOf(item);
+        if (removeIndex >= 0)
+        {
+            list[removeIndex] = default(T);
+            occupiedSlots--;
+            return true;
+        }
+        return false;
+    }
 
 	/// <summary>Advances the Circular Buffer without making an insertion. The method is useful if you are explicitely modifying the CircularBuffer's item at the index.</summary>
 	public void Advance()

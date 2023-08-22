@@ -216,7 +216,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>, IEnumerable<KeyVa
 	{
 		foreach(KeyValuePair<int, IObjectPool<IPoolObject>> pair in this)
 		{
-			pair.Value.EvaluateObjectsToDestroy();
+			pair.Value.OnObjectsToDestroyEvaluation();
 		}
 	}
 

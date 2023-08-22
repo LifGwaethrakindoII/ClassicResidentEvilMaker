@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace Voidless
 {
-public class Node<T>
+[Serializable]
+public class Node<T> : IEnumerable<Node<T>>
 {
-	private T _data; 		/// <summary>Node's Data.</summary>
-	private Node<T> _next; 	/// <summary>Next's Node.</summary>
+	[SerializeField] private T _data;
+	[SerializeField] private Node<T> _next;
 
 	/// <summary>Gets and Sets data property.</summary>
 	public T data
@@ -24,6 +25,9 @@ public class Node<T>
 		set { _next = value; }
 	}
 
+	/// <summary>Parameterless' Constructor.</summary>
+	public Node() { /*...*/ }
+
 	/// <summary>Node default constructor.</summary>
 	/// <param name="_data">Node's Data.</param>
 	public Node(T _data)
@@ -38,5 +42,20 @@ public class Node<T>
 	{
 		next = _next;
 	}
+
+	///<summary> Implementing IEnumerable<T> interface.</summary>
+    public virtual IEnumerator<Node<T>> GetEnumerator()
+    {
+        yield return next;
+    }
+
+    ///<summary> Implementing IEnumerable interface (non-generic version).</summary>
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+	/// <summary>Gets updated data from this Node.</summary>
+	public virtual T Update() { return default(T); }
 }
 }

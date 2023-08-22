@@ -7,7 +7,7 @@ namespace Voidless
 {
 public abstract class BaseSpawnController<T> : MonoBehaviour where T : MonoBehaviour, IPoolObject
 {
-	[SerializeField] private T _spawnEntity; 					/// <summary>Spawn entity.</summary>
+	/*[SerializeField] private T _spawnEntity; 					/// <summary>Spawn entity.</summary>
 	[SerializeField] private WaypointGenerator _spawnPoints; 	/// <summary>Spawn points controller.</summary>
 	[SerializeField] private int _startQuantity; 				/// <summary>Start quantity when the schedule starts.</summary>
 	[SerializeField] private int _terminationScore; 			/// <summary>Spawn entities needed for the spawn controller to terminate.</summary>
@@ -173,6 +173,6 @@ public abstract class BaseSpawnController<T> : MonoBehaviour where T : MonoBehav
 			}
 		}
 		EndSpawnSchedule();
-	}
+	}*/
 }
 }

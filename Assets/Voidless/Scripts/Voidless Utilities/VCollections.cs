@@ -121,5 +121,43 @@ public static class VCollections
             list.AddRange(Enumerable.Repeat(element, size - count));
         }
     }
+
+	/*static void DequeueSpecificItem<T>(Queue<T> queue, T itemToRemove)
+    {
+        // Create a temporary Queue to store items to keep
+        Queue<T> tempQueue = new Queue<T>();
+
+        // Dequeue and enqueue items except the one to remove
+        while (queue.Count > 0)
+        {
+            T currentItem = queue.Dequeue();
+            if (!EqualityComparer<T>.Default.Equals(currentItem, itemToRemove))
+            {
+                tempQueue.Enqueue(currentItem);
+            }
+        }
+
+        // Copy the items back to the original queue
+        foreach (T item in tempQueue)
+        {
+            queue.Enqueue(item);
+        }
+    }*/
+
+    /// <summary>Removes specific item from Queue [O(n) in space and time].</summary>
+    /// <param name="_queue">Queue's reference.</param>
+    /// <param name="_element">Element to remove.</param>
+    public static void Remove<T>(ref Queue<T> _queue, T _element) where T : class
+    {
+        Queue<T> newQueue = new Queue<T>();
+
+        foreach(T element in _queue)
+        {
+            if(_element == element) continue;
+            newQueue.Enqueue(element);
+        }
+
+        if(_queue.Count != newQueue.Count) _queue = newQueue;
+    }
 }
 }

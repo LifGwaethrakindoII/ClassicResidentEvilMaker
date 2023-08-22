@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Voidless
 {
-public abstract class PoolObjectRequester<T> : MonoBehaviour, ICameraVisibleHandler where T : MonoBehaviour, IPoolObject
+public abstract class PoolObjectRequester<T> : MonoBehaviour/*, ICameraVisibleHandler*/ where T : MonoBehaviour, IPoolObject
 {
-	[SerializeField] private T _requestedPoolObject; 		/// <summary>Pool Object to Request.</summary>
+	/*[SerializeField] private T _requestedPoolObject; 		/// <summary>Pool Object to Request.</summary>
 	[SerializeField] private float _invisibleTolerance; 	/// <summary>Description.</summary>
 	[SerializeField] private bool _unableToRequest; 		/// <summary>Is this Requester unable to request a Pool Object? by default false.</summary>
 	private T _poolObjectReference; 						/// <summary>Pool Object retrieved's reference.</summary>
@@ -130,6 +130,6 @@ public abstract class PoolObjectRequester<T> : MonoBehaviour, ICameraVisibleHand
 	{
 		if(poolObjectReference != null && poolObjectReference.active)
 		ObjectPoolManager.Instance.RequestDeactivation(poolObjectReference);
-	}
+	}*/
 }
 }

@@ -7,10 +7,10 @@ namespace Voidless
 {
 public class PoolUIElement : UIElement, IPoolObject
 {
-	public event OnPoolObjectDeactivation onPoolObjectDeactivation; 	/// <summary>Event invoked when this Pool Object is being deactivated.</summary>
+	public event OnPoolObjectEvent onPoolObjectEvent;
 
-	[SerializeField] private bool _dontDestroyOnLoad; 					/// <summary>Is this Pool Object going to be destroyed when changing scene? [By default it destroys it].</summary>
-	private bool _active; 												/// <summary>Is this Pool Object active [preferibaly unavailable to recycle]?.</summary>
+	[SerializeField] private bool _dontDestroyOnLoad;
+	private bool _active;
 
 	/// <summary>Gets and Sets dontDestroyOnLoad property.</summary>
 	public bool dontDestroyOnLoad
@@ -33,25 +33,33 @@ public class PoolUIElement : UIElement, IPoolObject
 		this.DefaultOnCreation();
 	}
 	
-	/// <summary>Actions made when this Pool Object is being reseted.</summary>
-	public virtual void OnObjectReset()
+	/// <summary>Actions made when this Pool Object is being recycled.</summary>
+	public virtual void OnObjectRecycled()
 	{
 		this.DefaultOnRecycle();
+		InvokeEvent(PoolObjectEvent.Recycled);
 	}
 	
 	/// <summary>Callback invoked when the object is deactivated.</summary>
 	public virtual void OnObjectDeactivation()
 	{
 		this.DefaultOnDeactivation();
-		if(onPoolObjectDeactivation != null) onPoolObjectDeactivation(this);
+		InvokeEvent(PoolObjectEvent.Deactivated);	
 	}
 	
 	/// <summary>Actions made when this Pool Object is being destroyed.</summary>
 	public virtual void OnObjectDestruction()
 	{
-		if(active && onPoolObjectDeactivation != null) onPoolObjectDeactivation(this);
+		InvokeEvent(PoolObjectEvent.Destroyed);
 		active = false;
 		this.DefaultOnDestruction();
+	}
+
+	/// <summary>Invokes onPoolObjectEvent's callback. Use this only to invoke that event [this is used as a public method that would allow another class to invoke Pool-Object's events].</summary>
+	/// <param name="_event">Event to invoke.</param>
+	public void InvokeEvent(PoolObjectEvent _event)
+	{
+		if(onPoolObjectEvent != null) onPoolObjectEvent(this, _event);
 	}
 #endregion
 }

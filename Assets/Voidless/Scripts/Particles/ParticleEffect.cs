@@ -57,22 +57,17 @@ How states are set on the following situations:
 = false.
 */
 [ExecuteInEditMode]
-public class ParticleEffect : MonoBehaviour, IPoolObject
+public class ParticleEffect : PoolGameObject
 {
-	private const byte FLAG_IS_ALIVE = 1 << 0; 							/// <summary>Is Alive's Flag.</summary>
-	private const byte FLAG_IS_PLAYING = 1 << 1; 						/// <summary>Is Playing's Flag.</summary>
-	private const byte FLAG_IS_PAUSED = 1 << 2; 						/// <summary>Is Paused's Flag.</summary>
-	private const byte FLAG_IS_STOPPED = 1 << 3; 						/// <summary>Is Stopped's Flag.</summary>
+	private const byte FLAG_IS_ALIVE = 1 << 0;
+	private const byte FLAG_IS_PLAYING = 1 << 1;
+	private const byte FLAG_IS_PAUSED = 1 << 2;
+	private const byte FLAG_IS_STOPPED = 1 << 3;
 
-	public event OnPoolObjectDeactivation onPoolObjectDeactivation; 	/// <summary>Event invoked when this Pool Object is being deactivated.</summary>
-
-	[SerializeField] private ParticleSystem[] _systems; 				/// <summary>ParticleSystems' Components controlled by this Effect.</summary>
-	private Dictionary<int, Behavior> _cooldowns; 						/// <summary>Cooldowns associated with each looping system.</summary>
-	private int _poolDictionaryID; 										/// <summary>Key's ID of this Pool Object on its respectrive pool dictionary.</summary>
-	private bool _dontDestroyOnLoad; 									/// <summary>Is this Pool Object going to be destroyed when changing scene? [By default it destroys it].</summary>
-	private bool _active; 												/// <summary>Is this Pool Object active [preferibaly unavailable to recycle]?.</summary>
-	private int _cooldownsCount; 										/// <summary>Cooldowns' Count.</summary>
-	private byte statesMask; 											/// <summary>Bit flags that store the states of the Particle Effect.</summary>
+	[SerializeField] private ParticleSystem[] _systems;
+	private Dictionary<int, Behavior> _cooldowns;
+	private int _cooldownsCount;
+	private byte statesMask;
 
 #region Getters/Setters:
 	/// <summary>Gets and Sets systems property.</summary>
@@ -89,32 +84,11 @@ public class ParticleEffect : MonoBehaviour, IPoolObject
 		set { _cooldowns = value; }
 	}
 
-	/// <summary>Gets and Sets poolDictionaryID property.</summary>
-	public int poolDictionaryID
-	{
-		get { return _poolDictionaryID; }
-		set { _poolDictionaryID = value; }
-	}
-
 	/// <summary>Gets and Sets cooldownsCount property.</summary>
 	public int cooldownsCount
 	{
 		get { return _cooldownsCount; }
 		set { _cooldownsCount = value; }
-	}
-
-	/// <summary>Gets and Sets dontDestroyOnLoad property.</summary>
-	public bool dontDestroyOnLoad
-	{
-		get { return _dontDestroyOnLoad; }
-		set { _dontDestroyOnLoad = value; }
-	}
-
-	/// <summary>Gets and Sets active property.</summary>
-	public bool active
-	{
-		get { return _active; }
-		set { _active = value; }
 	}
 
 	/// <summary>Gets isAlive property.</summary>
@@ -143,7 +117,6 @@ public class ParticleEffect : MonoBehaviour, IPoolObject
 		if(cooldowns == null) cooldowns = new Dictionary<int, Behavior>();
 		Stop();
 		Clear();
-		if(onPoolObjectDeactivation != null) onPoolObjectDeactivation(this);
 	}
 
 	/// <summary>ParticleEffect's instance initialization when loaded [Before scene loads].</summary>
@@ -331,32 +304,6 @@ public class ParticleEffect : MonoBehaviour, IPoolObject
 		}
 
 		cooldowns.Clear();
-	}
-#endregion
-
-#region IPoolObjectCallbacks:
-	/// <summary>Independent Actions made when this Pool Object is being created.</summary>
-	public void OnObjectCreation()
-	{
-		this.DefaultOnCreation();
-	}
-
-	/// <summary>Actions made when this Pool Object is being reseted.</summary>
-	public void OnObjectReset()
-	{
-		this.DefaultOnRecycle();
-	}
-
-	/// <summary>Callback invoked when the object is deactivated.</summary>
-	public void OnObjectDeactivation()
-	{
-		this.DefaultOnDeactivation();
-	}
-
-	/// <summary>Actions made when this Pool Object is being destroyed.</summary>
-	public void OnObjectDestruction()
-	{
-		this.DefaultOnDestruction();
 	}
 #endregion
 

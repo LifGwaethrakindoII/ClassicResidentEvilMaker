@@ -1,14 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/*===========================================================================
+**
+** Interface:  IObjectPool
+**
+** Purpose: Object-Pool Interface. Maybe it is an innecessary interface, the
+** base reference object should be BaseObjectPool<T> without this interface.
+**
+**
+** Author: Lîf Gwaethrakindo
+**
+===========================================================================*/
 namespace Voidless
 {
-public interface IObjectPool<out T> where T : IPoolObject
+public enum LimitHandling { None, RecycleRandom }
+
+public interface IObjectPool<out T> : IEnumerable<T> where T : IPoolObject
 {
-	T referenceObject { get; } 				/// <summary>Gets referenceObject property.</summary>
-	int limit { get; set; } 				/// <summary>Gets and Sets limit property.</summary>
-	int occupiedSlotsCount { get; set; } 	/// <summary>Gets and Sets occupiedSlotsCount property.</summary>
-	int vacantSlotsCount { get; set; } 		/// <summary>Gets and Sets vacantSlotsCount property.</summary>
+	/// <summary>Gets referenceObject property.</summary>
+	T referenceObject { get; }
+	/// <summary>Gets and Sets limit property.</summary>
+	int limit { get; set; }
+	/// <summary>Gets occupiedSlotsCount property.</summary>
+	int occupiedSlotsCount { get; }
+	/// <summary>Gets vacantSlotsCount property.</summary>
+	int vacantSlotsCount { get; }
+	/// <summary>Gets And Sets limitHandling.</summary>
+	LimitHandling limitHandling { get; set; }
 
 	/// <summary>Adds Pool Object.</summary>
 	/// <returns>Added Pool Object.</returns>
@@ -26,8 +45,8 @@ public interface IObjectPool<out T> where T : IPoolObject
 	/// <param name="_poolObject">Pool Object to deactivate.</param>
 	void Deactivate(IPoolObject _poolObject);
 
-	/// <summary>Evaluates which objects to destroy.</summary>
-	void EvaluateObjectsToDestroy();
+	/// <summary>Callback when evaluation for Pool-Objects' destruction should occur.</summary>
+	void OnObjectsToDestroyEvaluation();
 }
 
 ///Example of contravariant and covariant interface, by implementing in and out interfaces:

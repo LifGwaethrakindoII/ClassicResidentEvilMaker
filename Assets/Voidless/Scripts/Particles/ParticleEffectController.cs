@@ -5,15 +5,10 @@ using UnityEngine;
 
 namespace Voidless
 {
-public class ParticleEffectController : MonoBehaviour, IPoolObject
+public class ParticleEffectController : PoolGameObject
 {
-	public event OnPoolObjectDeactivation onPoolObjectDeactivation; 	/// <summary>Event invoked when this Pool Object is being deactivated.</summary>
-
-	[SerializeField] private bool _dontDestroyOnLoad; 					/// <summary>Is this Pool Object going to be destroyed when changing scene? [By default it destroys it].</summary>
-	[SerializeField] private List<ParticleEffect> _particleEffects; 	/// <summary>Particle Effects.</summary>
-	[SerializeField] private List<ParticleSystem> _particleSystems; 	/// <summary>Particle Systems.</summary>
-	private int _poolDictionaryID; 										/// <summary>Key's ID of this Pool Object on its respectrive pool dictionary.</summary>
-	private bool _active; 												/// <summary>Is this Pool Object active [preferibaly unavailable to recycle]?.</summary>
+	[SerializeField] private List<ParticleEffect> _particleEffects;
+	[SerializeField] private List<ParticleSystem> _particleSystems;
 	protected Coroutine fade;
 	protected Coroutine scale;
 
@@ -31,73 +26,11 @@ public class ParticleEffectController : MonoBehaviour, IPoolObject
 		set { _particleSystems = value; }
 	}
 
-	/// <summary>Gets and Sets dontDestroyOnLoad property.</summary>
-	public bool dontDestroyOnLoad
-	{
-		get { return _dontDestroyOnLoad; }
-		set { _dontDestroyOnLoad = value; }
-	}
-
-	/// <summary>Gets and Sets poolDictionaryID property.</summary>
-	public int poolDictionaryID
-	{
-		get { return _poolDictionaryID; }
-		set { _poolDictionaryID = value; }
-	}
-
-	/// <summary>Gets and Sets active property.</summary>
-	public bool active
-	{
-		get { return _active; }
-		set { _active = value; }
-	}
-
-#region UnityMethods:
-	private void OnEnable()
-	{
-		active = true;
-	}
-
-	private void OnDisable()
-	{
-		PauseAll();
-		active = false;
-		if(onPoolObjectDeactivation != null) onPoolObjectDeactivation(this);
-	}
-
 	/// <summary>ParticleEffectController's instance initialization.</summary>
 	private void Awake()
 	{
 		if(particleSystems == null || particleSystems.Count == 0) particleSystems = transform.GetComponentsFromChilds<ParticleSystem>();
 	}
-#endregion
-
-#region IPoolObjectMethods:
-	/// <summary>Independent Actions made when this Pool Object is being created.</summary>
-	public virtual void OnObjectCreation()
-	{
-		gameObject.SetActive(false);
-	}
-
-	/// <summary>Actions made when this Pool Object is being reseted.</summary>
-	public virtual void OnObjectReset()
-	{
-		if(gameObject.activeSelf) gameObject.SetActive(false);
-		gameObject.SetActive(true);
-	}
-
-	/// <summary>Callback invoked when the object is deactivated.</summary>
-	public virtual void OnObjectDeactivation()
-	{
-		gameObject.SetActive(false);
-	}
-
-	/// <summary>Actions made when this Pool Object is being destroyed.</summary>
-	public virtual void OnObjectDestruction()
-	{
-		Destroy(gameObject);
-	}
-#endregion
 
 	/// <summary>Plays all Particle Systems.</summary>
 	public void PlayAll()

@@ -1,10 +1,25 @@
 ﻿using System.Collections;
+using System;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Object = UnityEngine.Object;
+
+/*===========================================================================
+**
+** Class:  GameObjectPool
+**
+** Purpose: Object-Pool class that receives as a reference an object that
+** implements both a MonoBehaviour class an the IPoolObject interface.
+**
+**
+** Author: Lîf Gwaethrakindo
+**
+===========================================================================*/
 namespace Voidless
 {
+[Serializable]
 public class GameObjectPool<T> : BaseObjectPool<T> where T : MonoBehaviour, IPoolObject
 {
 	private const string TAG_GROUP = "Group_"; 		/// <summary>Group's prefix.</summary>
@@ -19,99 +34,50 @@ public class GameObjectPool<T> : BaseObjectPool<T> where T : MonoBehaviour, IPoo
 		private set { _poolGroup = value; }
 	}
 
-	/// <summary>GameObjectPool's Constructor.</summary>
+	/// <summary>ObjectPool's Constructor.</summary>
 	/// <param name="_referenceObject">Pool's Reference Prefab.</param>
 	/// <param name="_size">Pool's starting size.</param>
 	/// <param name="_limit">Pool's Limit.</param>
-	public GameObjectPool(T _referenceObject, int _size = 1, int _limit = int.MaxValue) : base(_referenceObject, _size, _limit)
+	/// <param name="_limitHandling">How to handle when Pool's size surpasses the limit.</param>
+	public GameObjectPool(T _referenceObject, int _size = 0, int _limit = int.MaxValue, LimitHandling _limitHandling = LimitHandling.None) : base(_referenceObject, _size, _limit, _limitHandling)
+	{ /*...*/ }
+
+#region Methods:
+/*===================================================================================================================================================
+| 	Methods:																																		|
+===================================================================================================================================================*/
+	/// <summary>Creates Pool-Object.</summary>
+	/// <returns>Created Pool-Object.</returns>
+	protected override T CreatePoolObject()
 	{
-		/// \TODO Not very sure yet:
-		/*if(_referenceObject != null)
-		{
-			T poolObject = Recycle(Vector3.zero, Quaternion.identity);
-			poolObject.OnObjectDeactivation();
-		}*/
-	}
-
-	/// <summary>Adds Pool Object.</summary>
-	/// <returns>Added Pool Object.</returns>
-	public override T Add()
-	{
-		T newObject = null;
-
-		if(Count < limit)
-		{
-			newObject = Object.Instantiate(referenceObject) as T;
-			newObject.gameObject.name = newObject.gameObject.name.Replace(TAG_CLONE, string.Empty);
-			//Object.DontDestroyOnLoad(newObject.gameObject);
-
-			//Debug.Log("[GameObjectPool] Do I have? " + newObject.ToString());
-
-			if(Count == 0)
-			{
-				poolGroup = new GameObject(TAG_GROUP + referenceObject.name).transform;
-				//Object.DontDestroyOnLoad(poolGroup.gameObject);
-			}
-
-			newObject.transform.SetParent(poolGroup);
-			poolStackQueue.Enqueue(newObject);
-		} else if(poolStackQueue.Count > 0)
-		{
-			Debug.LogWarning("[GameObjectPool] Pool's Size has reaches its limit, recycling instead.");
-			newObject = poolStackQueue.PeekQueue();
-			if(newObject != null && !newObject.active) newObject = Recycle();
-		}
-		newObject.OnObjectCreation();
-
-		return newObject;
-	}
-
-	/// <summary>Recycles Pool Object from queue [dequeues], then it enqueues is again.</summary>
-	/// <returns>Recycled Pool Object.</returns>
-	public override T Recycle()
-	{
-		return Recycle(Vector3.zero, Quaternion.identity);
+		return referenceObject != null ? Object.Instantiate(referenceObject) as T : null;
 	}
 
 	/// <summary>Recycles Pool Object from queue [dequeues], then it enqueues is again.</summary>
 	/// <param name="_position">Pool Object's position.</param>
 	/// <param name="_rotation">Pool Object's rotation.</param>
+	/// <param name="onBeforeInvokingRecycleCallback">Callback to invoke before invoking OnObjectRecycle on this recycled Pool-Object [null by default].</param>
 	/// <returns>Recycled Pool Object.</returns>
-	public T Recycle(Vector3 _position = default(Vector3), Quaternion _rotation = default(Quaternion))
+	public T Recycle(Vector3 _position = default(Vector3), Quaternion _rotation = default(Quaternion), Action<T> onBeforeInvokingRecycleCallback = null)
 	{
-		if(_rotation == default(Quaternion)) _rotation = Quaternion.identity;
-		
-		T recycledObject = poolStackQueue.Count > 0 ? poolStackQueue.PeekQueue() : null;
+		// Passing false so the recycle callback is not invoked inside the function.
+		// Instead, it is called here but after setting the position and rotation.
+		T recycledObject = InternalRecycle(false);
 
-		if(recycledObject != null && !recycledObject.active)
+		if(recycledObject == null)
 		{
-			poolStackQueue.Dequeue();
-			poolStackQueue.Enqueue(recycledObject);
+			Debug.LogError("[GameObjectPool] Unexpected error occurred while trying to recycle Pool-Object from reference " + referenceObject.name);
+			return null;
 		}
-		else recycledObject = Add();
+
+		if(_rotation == default(Quaternion)) _rotation = Quaternion.identity;
 
 		recycledObject.transform.position = _position;
 		recycledObject.transform.rotation = _rotation;
-		recycledObject.OnObjectReset();
+		if(onBeforeInvokingRecycleCallback != null) onBeforeInvokingRecycleCallback(recycledObject);
+		recycledObject.OnObjectRecycled();
+
 		return recycledObject;
-	}
-
-	/// <summary>Evaluates which objects to destroy.</summary>
-	public override void EvaluateObjectsToDestroy()
-	{
-		bool destroyGroup = true;
-
-		foreach(T item in poolStackQueue)
-		{
-			if(item.dontDestroyOnLoad) destroyGroup = false;
-			else Object.Destroy(item.gameObject);
-		}
-
-		if(destroyGroup)
-		{
-			Object.Destroy(poolGroup.gameObject);
-			poolStackQueue.Clear();
-		}
 	}
 
 	/// <summary>Regroups Pool Object into Pool's Group Transform.</summary>
@@ -158,5 +124,54 @@ public class GameObjectPool<T> : BaseObjectPool<T> where T : MonoBehaviour, IPoo
 
 		return poolsDictionary;
 	}
+#endregion
+
+#region Callbacks:
+/*===================================================================================================================================================
+| 	Callbacks:																																		|
+===================================================================================================================================================*/
+	/// <summary>Callback internally invoked after a Pool-Object has been successfully created.</summary>
+	/// <param name="_poolObject">Pool-Object.</param>
+	protected override void OnPoolObjectCreated(T _poolObject)
+	{
+		base.OnPoolObjectCreated(_poolObject);
+
+		_poolObject.gameObject.name = _poolObject.gameObject.name.Replace(TAG_CLONE, string.Empty);
+		if(poolGroup == null) poolGroup = new GameObject(TAG_GROUP + referenceObject.name).transform;
+		ReparentToGroup(_poolObject);
+	}
+
+	/// <summary>Callback when evaluation for Pool-Objects' destruction should occur.</summary>
+	public override void OnObjectsToDestroyEvaluation()
+	{
+		bool destroyGroup = true;
+
+		foreach(T item in this)
+		{
+			if(item.dontDestroyOnLoad) destroyGroup = false;
+			else Object.Destroy(item.gameObject);
+		}
+
+		if(destroyGroup)
+		{
+			Object.Destroy(poolGroup.gameObject);
+			vacantQueue.Clear();
+			occupiedMap.Clear();
+		}
+	}
+
+	/// <summary>Callback invoked when a IPoolObject event occurs.</summary>
+	/// <param name="_poolObject">PoolObject Invoker.</param>
+	/// <param name="_event">Type of Event that occured.</param>
+	protected override void OnPoolObjectEvent(IPoolObject _poolObject, PoolObjectEvent _event)
+	{
+		base.OnPoolObjectEvent(_poolObject, _event);
+		if(_event == PoolObjectEvent.Deactivated)
+		{
+			T element = _poolObject as T;
+			if(element != null) ReparentToGroup(element);
+		}
+	}
+#endregion
 }
 }
