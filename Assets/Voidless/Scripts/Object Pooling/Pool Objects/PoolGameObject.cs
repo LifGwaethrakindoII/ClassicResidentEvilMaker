@@ -3,6 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*===========================================================================
+**
+** Class:  PoolGameObject
+**
+** Purpose: Template Pool-Object class that already implements the
+** IPoolObject interface with the correct callback functionality.
+**
+** It also inherits from LGGMonoBehaviour, so the class is ready for
+** HashSets and Dictionaries too.
+**
+** Author: Lîf Gwaethrakindo
+**
+===========================================================================*/
 namespace Voidless
 {
 public class PoolGameObject : VMonoBehaviour, IPoolObject

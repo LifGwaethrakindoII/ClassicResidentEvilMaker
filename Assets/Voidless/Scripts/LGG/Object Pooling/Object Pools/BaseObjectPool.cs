@@ -18,7 +18,7 @@ using UnityEngine;
 **
 ===========================================================================*/
 
-namespace Voidless
+namespace LGG
 {
 	/// \TODO Return additional result info when requesting Pool-Objects.
 	/// Both internally and from requester classes.
