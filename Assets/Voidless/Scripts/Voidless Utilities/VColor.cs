@@ -14,6 +14,19 @@ public static class VColor
 	public static readonly Color purple;
 	public static readonly Color pink;
 	public static readonly Color brown;
+	public static readonly Color transparentRed;
+	public static readonly Color transparentGreen;
+	public static readonly Color transparentBlue;
+	public static readonly Color transparentWhite;
+	public static readonly Color transparentCyan;
+	public static readonly Color transparentMagenta;
+	public static readonly Color transparentYellow;
+	public static readonly Color transparentBlack;
+	public static readonly Color transparentGrey;
+	public static readonly Color transparentPink;
+	public static readonly Color transparentOrange;
+	public static readonly Color transparentPurple;
+	public static readonly Color transparentBrown;
 
 	/// <summary>Static's constructor.</summary>
 	static VColor()
@@ -24,6 +37,19 @@ public static class VColor
 		purple = new Color(0.5f, 0.0f, 0.5f, 1.0f);
 		pink = new Color(1.0f, 0.752941176f, 0.796078431f);
 		brown = new Color(0.647058823f, 0.164705882f, 0.164705882f);
+		transparentRed = Color.red.WithAlpha(0.3f);
+		transparentGreen = Color.green.WithAlpha(0.3f);
+		transparentBlue = Color.blue.WithAlpha(0.3f);
+		transparentWhite = Color.white.WithAlpha(0.3f);
+		transparentCyan = Color.cyan.WithAlpha(0.3f);
+		transparentMagenta = Color.magenta.WithAlpha(0.3f);
+		transparentYellow = Color.yellow.WithAlpha(0.3f);
+		transparentBlack = Color.black.WithAlpha(0.3f);
+		transparentGrey = Color.grey.WithAlpha(0.3f);
+		transparentPink = pink.WithAlpha(0.3f);
+		transparentOrange = orange.WithAlpha(0.3f);
+		transparentPurple = purple.WithAlpha(0.3f);
+		transparentBrown = brown.WithAlpha(0.3f);
 	}
 
 	/// <summary>Sets Color Alpha.</summary>

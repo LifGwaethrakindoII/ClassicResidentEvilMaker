@@ -25,26 +25,28 @@ namespace LGG
         protected override void OnEnable()
     	{
     		base.OnEnable();
+            GameObjectPoolManager.AddRequester(this);
     	}
 
         /// <summary>This function is called when the behaviour becomes disabled.</summary>
         protected override void OnDisable()
     	{
     		base.OnDisable();
+            GameObjectPoolManager.RemoveRequester(this);
     	}
 
     	/// <summary>Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.</summary>
         protected override void Start()
     	{
     		base.Start();
-    		GameObjectPoolManager.AddRequester(this);
+    		//GameObjectPoolManager.AddRequester(this);
     	}
 
         /// <summary>Destroying the attached Behaviour will result in the game or Scene receiving OnDestroy.</summary>
         protected override void OnDestroy()
     	{
     		base.OnDestroy();
-    		GameObjectPoolManager.RemoveRequester(this);
+    		//GameObjectPoolManager.RemoveRequester(this);
     	}
 
 		/// \TODO Shit's temporal

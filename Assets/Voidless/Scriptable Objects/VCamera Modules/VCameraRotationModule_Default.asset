@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e087c1900bbff4d88bca39b3704daa, type: 3}
+  m_Name: VCameraRotationModule_Default
+  m_EditorClassIdentifier: 
+  _followMode: 0
+  _speedChange: 0
+  _speedScalar: 0
+  _relativeToTarget: 0
+  _ignoreAxes: 0
+  _acceleration: 90
+  _reachThreshold: 0.1
+  xAxisFollowData:
+    followMode: 0
+    speedChange: 0
+    acceleration: 90
+    velocity: 0
+  yAxisFollowData:
+    followMode: 0
+    speedChange: 0
+    acceleration: 15
+    velocity: 0
+  zAxisFollowData:
+    followMode: 0
+    speedChange: 0
+    acceleration: 90
+    velocity: 0
+  _rotationOffset:
+    _eulerAngles: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}

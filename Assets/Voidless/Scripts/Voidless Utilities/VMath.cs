@@ -1150,7 +1150,7 @@ public static class VMath
     /// <param name="dt">Time's Delta.</param>
     /// <param name="m">Speed Change's Mode. Acceleration by default.</param>
     /// <param name="e">Epsilon's tolerance.</param>
-    public static float AccelerateTowards(float x, float y, ref float v, float a, float dt, SpeedChange m = SpeedChange.Acceleration, float e = EPSILON)
+    public static float AccelerateTowards(float x, float y, ref float v, float a, float dt, SpeedChange m = SpeedChange.Acceleration, float e = EPSILON, bool _resetVelocity = true)
     {
         /*Where:
         - d = Delta or error margin between the target and current value
@@ -1161,7 +1161,7 @@ public static class VMath
 
         if(Mathf.Abs(d) <= e)
         {
-            v = 0.0f;
+            if(_resetVelocity) v = 0.0f;
             x = y;
             return x;
         }
@@ -1194,7 +1194,7 @@ public static class VMath
         add delta instead of the velocity (setting x equal to y is also valid)*/
         if(s == 1.0f ? p > y : p < y)
         {
-            v = 0.0f;
+            if(_resetVelocity) v = 0.0f;
             x += d;
         }
         else x += v;
@@ -1476,6 +1476,37 @@ public static class VMath
 		return x < min ? min : x > max ? max : x;
 	}
 #endregion
+
+	/// <summary>Calculates the Quadratic Formula.</summary>
+	/// <param name="a">Linear coeficient A.</param>
+	/// <param name="b">Quadratic coeficient B.</param>
+	/// <param name="c">Constant coeficient C.</param>
+	/// <param name="s">Sign that indicates whether you want the positive or negative result of the quadratic formula.</param>
+	/// <returns>Quadratic formula solving for x.</returns>
+	public static float QuadraticFormula(float a, float b, float c, float s = 1.0f)
+	{
+		s = Mathf.Sign(s); // Re-normalize to either -1.0f or 1.0f
+
+		/// x = (b +/- Sqrt(b^2 - 4.0f * a * c)) / 2/0f
+		return (-b + (s * Mathf.Sqrt(b * b - 4.0f * a * c))) * 0.5f;
+	}
+
+	/// <summary>Calculates the Quadratic Formula.</summary>
+	/// <param name="a">Linear coeficient A.</param>
+	/// <param name="b">Quadratic coeficient B.</param>
+	/// <param name="c">Constant coeficient C.</param>
+	/// <param name="p">Positive result.</param>
+	/// <param name="n">Negative result.</param>
+	/// <returns>Positive result of the quadratic formula.</returns>
+	public static float QuadraticFormula(float a, float b, float c, out float p, out float n)
+	{
+		float sqrt = Mathf.Sqrt(b * b - 4.0f * a * c);
+
+		p = (-b + sqrt) * 0.5f;
+		n = (-b - sqrt) * 0.5f;
+
+		return p;
+	}
 
 #region LongFunctions:
 	/// <summary>Clamps long to a maximum value.</summary>

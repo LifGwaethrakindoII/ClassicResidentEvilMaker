@@ -189,6 +189,78 @@ public static class VPhysics
 		}
 	}
 
+#region Kinematics:
+	/// <returns>Vector squared.</returns>
+	public static Vector3 Squared(this Vector3 v)
+	{
+		return Vector3.Scale(v, v);
+	}
+
+    /// <summary>Function to calculate d (s) as Vector3</summary>
+    /// <param name="v0">Initial Velocity.</param>
+    /// <param name="a">Acceleration.</param>
+    /// <param name="t">Time.</param>
+    public static Vector3 CalculateDisplacement(Vector3 v0, Vector3 a, float t)
+    {
+        // s = ut + (1/2)at^2
+        return v0 * t + 0.5f * a * t * t;
+    }
+
+    /// <summary>Function to calculate initial velocity (u) as Vector3</summary>
+    /// <param name="d">Displacement.</param>
+    /// <param name="a">Acceleration.</param>
+    /// <param name="t">Time.</param>
+    public static Vector3 CalculateInitialVelocity(Vector3 d, Vector3 a, float t)
+    {
+        // u = (s - (1/2)at^2) / t
+        return (d - 0.5f * a * t * t) / t;
+    }
+
+    /// <summary>Function to calculate final velocity (v) as Vector3</summary>
+    /// <param name="v0">Initial Velocity.</param>
+    /// <param name="a">Acceleration.</param>
+    /// <param name="t">Time.</param>
+    public static Vector3 CalculateFinalVelocity(Vector3 v0, Vector3 a, float t)
+    {
+        // v = u + at
+        return v0 + a * t;
+    }
+
+    /// <summary>Function to calculate a (a) as Vector3</summary>
+    /// <param name="v0">Initial Velocity.</param>
+    /// <param name="vf">Final Velocity.</param>
+    /// <param name="t">Time.</param>
+    public static Vector3 CalculateAcceleration(Vector3 v0, Vector3 vf, float t)
+    {
+        // a = (v - u) / t
+        return (vf - v0) / t;
+    }
+
+    /// <summary>Function to calculate t (t).</summary>
+    /// <param name="v0">Initial Velocity.</param>
+    /// <param name="vf">Final Velocity.</param>
+    /// <param name="a">Acceleration.</param>
+    public static float CalculateTime(Vector3 v0, Vector3 vf, Vector3 a)
+    {
+        // t = (v - u) / a
+        Vector3 deltaV = vf - v0;
+
+        // Check each component to find the maximum time (use the largest magnitude)
+        float maxTime = 0.0f;
+
+        if (Mathf.Abs(a.x) > Mathf.Epsilon)
+            maxTime = Mathf.Max(maxTime, deltaV.x / a.x);
+
+        if (Mathf.Abs(a.y) > Mathf.Epsilon)
+            maxTime = Mathf.Max(maxTime, deltaV.y / a.y);
+
+        if (Mathf.Abs(a.z) > Mathf.Epsilon)
+            maxTime = Mathf.Max(maxTime, deltaV.z / a.z);
+
+        return maxTime;
+    }
+#endregion
+
 #region SphereCast:
 	/// <summary>Cast a Sphere along a direction and stores the result to a given hit information.</summary>
 	/// <param name="ray">Ray.</param>

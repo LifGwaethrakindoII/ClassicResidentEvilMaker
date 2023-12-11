@@ -406,6 +406,57 @@ public static class VVector3
 	}
 #endregion
 
+	/// <summary>Accelerates x vector into y vector (based on LGGMath.AccelerateTowards).</summary>
+    /// <param name="x">Vector to accelerate.</param>
+    /// <param name="y">Target vector.</param>
+    /// <param name="v">Velocity's reference.</param>
+    /// <param name="a">Acceleration rate (x / s^2).</param>
+    /// <param name="dt">Time's Delta.</param>
+    /// <param name="m">Speed Change's Mode. Acceleration by default.</param>
+    /// <param name="e">Epsilon's tolerance.</param>
+	public static Vector3 AccelerateTowards(Vector3 x, Vector3 y, ref Vector3 v, float a, float dt, SpeedChange mode = SpeedChange.Acceleration, float epsilon = VMath.EPSILON, bool _resetVelocity = true)
+	{
+	    Vector3 delta = y - x;
+
+	    if (delta.magnitude <= epsilon)
+	    {
+	        if(_resetVelocity) v = Vector3.zero;
+	        x = y;
+	        return x;
+	    }
+
+	    Vector3 direction = delta.normalized;
+
+	    /// If both x and y vectors are pointing at very different directions, reset the v.
+	    if(Vector3.Dot(v, direction) < 0.0f) v = Vector3.zero;
+
+	    switch(mode)
+	    {
+	        case SpeedChange.Acceleration:
+	            v += direction * a * dt * dt;
+	           break;
+
+	        case SpeedChange.Linear:
+	            v = direction * a * dt;
+	           break;
+	    }
+
+	    Vector3 projectedVector = x + v;
+
+	    if ((Vector3.Dot(projectedVector - x, delta) < 0.0f) != (Vector3.Dot(y - x, delta) < 0.0f))
+	    {
+	        if(_resetVelocity) v = Vector3.zero;
+	        x += delta;
+	    }
+	    else
+	    {
+	        x = projectedVector;
+	    }
+
+	    return x;
+	}
+
+
 	/// <summary>Calculates a component-wise Vector division.</summary>
 	/// <param name="a">Vector A.</param>
 	/// <param name="b">Vector B.</param>

@@ -23,6 +23,56 @@ public static class VVector2
 		};
 	}
 
+	/// <summary>Accelerates x vector into y vector (based on LGGMath.AccelerateTowards).</summary>
+    /// <param name="x">Vector to accelerate.</param>
+    /// <param name="y">Target vector.</param>
+    /// <param name="v">Velocity's reference.</param>
+    /// <param name="a">Acceleration rate (x / s^2).</param>
+    /// <param name="dt">Time's Delta.</param>
+    /// <param name="m">Speed Change's Mode. Acceleration by default.</param>
+    /// <param name="e">Epsilon's tolerance.</param>
+	public static Vector2 AccelerateTowards(Vector2 x, Vector2 y, ref Vector2 v, float a, float dt, SpeedChange mode = SpeedChange.Acceleration, float epsilon = VMath.EPSILON)
+	{
+	    Vector2 delta = y - x;
+
+	    if (delta.magnitude <= epsilon)
+	    {
+	        v = Vector2.zero;
+	        x = y;
+	        return x;
+	    }
+
+	    Vector2 direction = delta.normalized;
+
+	    /// If both x and y vectors are pointing at very different directions, reset the v.
+	    if(Vector2.Dot(v, direction) < 0.0f) v = Vector2.zero;
+
+	    switch(mode)
+	    {
+	        case SpeedChange.Acceleration:
+	            v += direction * a * dt * dt;
+	           break;
+
+	        case SpeedChange.Linear:
+	            v = direction * a * dt;
+	           break;
+	    }
+
+	    Vector2 projectedVector = x + v;
+
+	    if ((Vector2.Dot(projectedVector - x, delta) < 0.0f) != (Vector2.Dot(y - x, delta) < 0.0f))
+	    {
+	        v = Vector2.zero;
+	        x += delta;
+	    }
+	    else
+	    {
+	        x = projectedVector;
+	    }
+
+	    return x;
+	}
+
 	/// <summary>Rotates Vector Counter-Clockwise by given angle.</summary>
 	/// <param name="v">Vector to rotate.</param>
 	/// <param name="a">Rotation's Angle [in degrees].</param>

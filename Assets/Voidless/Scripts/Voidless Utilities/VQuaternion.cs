@@ -16,6 +16,81 @@ public static class VQuaternion
 		ROTATION_OFFSET_UP = new EulerRotation(270.0f, 0.0f, 0.0f);
 	}
 
+	/// <summary>Rotates Quaternion A towards Quaternion B with different speeds per axis.</summary>
+	/// <param name="a">Quaternion A [From].</param>
+	/// <param name="b">Quaternion B [Target].</param>
+	/// <param name="pitchSpeed">Speed on the X-Axis.</param>
+	/// <param name="yawSpeed">Speed on the Y-Axis.</param>
+	/// <param name="rollSpeed">Speed on the Z-Axis.</param>
+	/// <param name="dt">Delta Time.</param>
+	/// <param name="up">Up Vector.</param>
+	public static Quaternion RotateTowards(Quaternion a, Quaternion b, float pitchSpeed, float yawSpeed, float rollSpeed, float dt, Vector3 up)
+    {
+        float pitchAngle, yawAngle, rollAngle;
+        Vector3 pitchAxis, yawAxis, rollAxis;
+
+        // Calculate the rotation from "from" to "to"
+        Quaternion deltaRotation = b * Quaternion.Inverse(a);
+
+        // Convert the delta rotation to angles and axes
+        deltaRotation.ToAngleAxis(out float deltaPitch, out Vector3 deltaPitchAxis);
+        deltaRotation.ToAngleAxis(out float deltaYaw, out Vector3 deltaYawAxis);
+        deltaRotation.ToAngleAxis(out float deltaRoll, out Vector3 deltaRollAxis);
+
+        // Ensure that the angles are within the range (-180, 180]
+        deltaPitch = Mathf.DeltaAngle(0, deltaPitch);
+        deltaYaw = Mathf.DeltaAngle(0, deltaYaw);
+        deltaRoll = Mathf.DeltaAngle(0, deltaRoll);
+
+        // Calculate the new angles and axes based on the desired speeds
+        pitchAngle = Mathf.MoveTowardsAngle(0, deltaPitch, pitchSpeed * dt);
+        yawAngle = Mathf.MoveTowardsAngle(0, deltaYaw, yawSpeed * dt);
+        rollAngle = Mathf.MoveTowardsAngle(0, deltaRoll, rollSpeed * dt);
+
+        // Calculate the new axes based on the updated angles
+        pitchAxis = Quaternion.AngleAxis(pitchAngle, up) * deltaPitchAxis;
+        yawAxis = Quaternion.AngleAxis(yawAngle, up) * deltaYawAxis;
+        rollAxis = Quaternion.AngleAxis(rollAngle, up) * deltaRollAxis;
+
+        // Combine the new rotations for pitch, yaw, and roll
+        Quaternion pitchRotation = Quaternion.AngleAxis(pitchAngle, pitchAxis);
+        Quaternion yawRotation = Quaternion.AngleAxis(yawAngle, yawAxis);
+        Quaternion rollRotation = Quaternion.AngleAxis(rollAngle, rollAxis);
+
+        // Combine all the rotations and return the result
+        return a * pitchRotation * yawRotation * rollRotation;
+    }
+
+	/// <summary>Calculates the average of a set of Quaternions.</summary>
+	/// <param name="quaternions">Set of Quaternions.</param>
+	/// <returns>Quaternions' Average.</returns>
+	public static Quaternion Average(params Quaternion[] quaternions)
+    {
+        if (quaternions == null || quaternions.Length == 0)
+        {
+            // Handle the case of an empty array or null input.
+            return Quaternion.identity;
+        }
+
+        // Initialize the accumulated quaternion to the first quaternion in the set.
+        Quaternion averageQuaternion = quaternions[0];
+
+        // Start the loop from the second quaternion.
+        for (int i = 1; i < quaternions.Length; i++)
+        {
+            // Calculate the weighting factor based on the current position in the loop.
+            float weight = 1.0f / (float)(i + 1.0f);
+
+            // Perform slerp between the accumulated quaternion and the current quaternion.
+            averageQuaternion = Quaternion.Slerp(averageQuaternion, quaternions[i], weight);
+        }
+
+        // Normalize the accumulated quaternion to obtain the average quaternion.
+        averageQuaternion.Normalize();
+
+        return averageQuaternion;
+    }
+
 	/// <summary>Gets the rotations (Quaternion) from a list of Transforms.</summary>
 	/// <param name="_list">The list of Transforms from where the Quaternion list will be created.</param>
 	/// <returns>List of the Transform rotation (Quaternion).</returns>
